@@ -106,7 +106,7 @@ $$
 \text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
 $$
 
-Here, \(C\) is the local concentration, $$(\overline{C})$$ is the mean value across the cross-section, and $$(\sigma_C\)$$ is the standard deviation.  
+Here, \(C\) is the local concentration, $$(\overline{C})$$ is the mean value across the cross-section, and $$(\sigma_C)$$ is the standard deviation.  
 A perfectly mixed flow has COV = 0, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899)).
 
 In a T-junction, \(COV) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
@@ -118,8 +118,8 @@ The rate at which this happens depends strongly on the momentum ratio \(J\):
 **Low \(J\)** – the jet dominates and penetrates fully across the pipe, resulting in rapid but locally intense mixing.
 
 
-Hydrogen blending studies show a similar dependence on momentum ratio \cite{Tian2025}.  
-At 10\% H₂, the required mixing length is roughly \(100D\), while at 25\% H₂ it drops to about \(21D\).  
+Hydrogen blending studies show a similar dependence on momentum ratio ([Tian et al.](https://www.mdpi.com/1996-1944/18/8/1879)).  
+At 10% H₂, the required mixing length is roughly \(100D\), while at 25% H₂ it drops to about \(21D\).  
 This same trend appears in my COMSOL simulations — stronger jets (lower \(J\)) mix quickly, whereas crossflow-dominated configurations (higher \(J\)) require a much longer channel to achieve uniformity.
 
 
