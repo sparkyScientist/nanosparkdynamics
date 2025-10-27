@@ -9,8 +9,8 @@ summary: "A deep dive into how the counter-rotating vortex pair (CVP) and moment
 
 ## Why T-Junctions Matter
 
-The humble **T-junction** is everywhere: in chemical plants, natural gas pipelines, and even microfluidic devices.  
-At first glance, it’s just a side pipe feeding into a main line. But in reality, a T-junction is a **canonical jet-in-crossflow (JICF) problem** — one of the most studied yet still rich flow physics cases in fluid dynamics.
+The humble T-junction is everywhere: in chemical plants, natural gas pipelines, and even microfluidic devices.  
+At first glance, it’s just a side pipe feeding into a main line. But in reality, a T-junction is a canonical jet-in-crossflow (JICF) problem — one of the most studied yet still rich flow physics cases in fluid dynamics.
 
 When a branch jet enters a main crossflow, the resulting interaction spawns a series of vortical structures, turbulent cascades, and scalar transport processes that dictate mixing efficiency.  
 
@@ -18,23 +18,23 @@ When a branch jet enters a main crossflow, the resulting interaction spawns a se
 
 ## Defining the Momentum Ratio
 
-In most of the literature, the **momentum flux ratio** is defined as jet momentum ÷ crossflow momentum.  
+In most of the literature, the momentum flux ratio is defined as jet momentum ÷ crossflow momentum.  
 Here, I flip that definition to emphasize the *competition between the crossflow and the branch jet*:
 
-\[
+$$
 J = \frac{\rho_\text{cross} U_\text{cross}^2}{\rho_\text{jet} U_\text{jet}^2}
-\]
+$$
 
 - **Low \(J\):** jet dominates (strong penetration).  
 - **High \(J\):** crossflow dominates (jet bends, attaches to wall).  
 
-This framing makes the physics of a T-junction a **momentum tug-of-war** between crossflow and branch jet.  
+This framing makes the physics of a T-junction a momentum tug-of-war between crossflow and branch jet.  
 
 ---
 
 ## Flow Physics: The Vortices That Do the Work
 
-Experiments using **PIV** and **PLIF** ([Pan et al., 2001](https://www.eng.buffalo.edu/Research/LFD/publications/2001/2001-1.pdf)) and LES simulations ([Salewski et al., 2008](https://backend.orbit.dtu.dk/ws/files/5739828/Mixing.pdf)) reveal that a handful of coherent structures dominate mixing:
+Experiments using PIV and PLIF ([Pan et al., 2001](https://www.eng.buffalo.edu/Research/LFD/publications/2001/2001-1.pdf)) and LES simulations ([Salewski et al., 2008](https://backend.orbit.dtu.dk/ws/files/5739828/Mixing.pdf)) reveal that a handful of coherent structures dominate mixing:
 
 - **Counter-Rotating Vortex Pair (CVP):** the kidney-shaped signature of JICF. The CVP folds the scalar interface, entrains crossflow into the jet, and drives macro-mixing.  
 - **Shear-Layer Vortices:** Kelvin–Helmholtz instabilities at the jet edge — critical for near-field entrainment.  
@@ -52,16 +52,16 @@ Classic experiments by Kok & van der Wal (1996) ([Kok & van der Wal, 1996](https
  revealed three distinct flow regimes that arise from the competition between the branch jet and the main crossflow.
 In their study, the momentum ratio was defined as :
 
-\[
+$$
 Mr = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2}
-\]
+$$
 
 where higher Mr corresponds to a stronger jet.
 In this post, I use the inverse convention,
 
-\[
+$$
 J = \frac{\rho_\text{cross} U_\text{cross}^2}{\rho_\text{jet} U_\text{jet}^2} = \frac{1}{M_R}
-\]
+$$
 so that increasing J indicates a stronger crossflow (and weaker jet).
 
 Figure 2 below, adapted from Kok & van der Wal (1996), shows the three canonical regimes as observed experimentally:
@@ -74,8 +74,8 @@ Impinging-Jet Regime (low J, high Mr) – the jet momentum dominates, crossing t
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
 *Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
-    The authors define \( M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2} \); 
-    here \( J = \frac{1}{M_R} \), so the horizontal ordering (wall $\rightarrow$ deflected $\rightarrow$ impinging) 
+    The authors define $$( M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2} $$); 
+    here $$( J = \frac{1}{M_R} $$), so the horizontal ordering (wall - deflected - impinging) 
     corresponds to increasing jet strength and decreasing \( J \).*
 
 
@@ -89,9 +89,9 @@ Moderate J – balanced momentum case (N₂ = 1457 sccm, H₂ = 500 sccm)
 The jet penetrates into the main stream and rolls up into a kidney-shaped CVP, consistent with the “deflected-jet” regime.
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig3.png'| relative_url }})  
-*Figure 3. {High \(J\)} – crossflow-dominated case (N$_2$ = 3000 sccm, N$_2$ = 2000 sccm).  
+*Figure 3. {High \(J\)} – crossflow-dominated case (N₂ = 3000 sccm, N₂ = 2000 sccm).  
     The jet bends sharply and remains attached to the wall, matching the “wall-jet” behavior seen experimentally.
-{Moderate \(J\)} – balanced momentum case (N$_2$ = 1457 sccm, H$_2$ = 500 sccm).  
+{Moderate \(J\)} – balanced momentum case (N₂ = 1457 sccm, H₂ = 500 sccm).  
     The jet penetrates into the main stream and rolls up into a kidney-shaped CVP, consistent with the “deflected-jet” regime.*
 
 ⚠️ *Note: My COMSOL simulations were parameterized by jet-to-crossflow **velocity ratios**, not explicit momentum ratios. Still, the qualitative transitions align directly with the regimes mapped in literature against \(J\).*  
@@ -104,9 +104,9 @@ The jet penetrates into the main stream and rolls up into a kidney-shaped CVP, c
 While the flow regimes describe how the jet and crossflow interact, the actual efficiency of mixing can be captured more quantitatively.  
 A common measure is the \textbf{Coefficient of Variation (COV)}, which compares the standard deviation of concentration to its mean value:
 
-\[
+$$
 \text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
-\]
+$$
 
 Here, \(C\) is the local concentration, \(\overline{C}\) is the mean value across the cross-section, and \(\sigma_C\) is the standard deviation.  
 A perfectly mixed flow has \(\text{COV} = 0\), while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899))..
@@ -114,11 +114,11 @@ A perfectly mixed flow has \(\text{COV} = 0\), while a mixture is considered ``u
 In a T-junction, \(\text{COV}\) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
 The rate at which this happens depends strongly on the momentum ratio \(J\):
 
-\begin{itemize}
-    \item \textbf{High \(J\)} – the crossflow dominates, and the jet hugs the wall. Mixing is slow and requires a long downstream length.
-    \item \textbf{Moderate \(J\)} – the jet and crossflow have comparable momentum. The CVP folds the interface efficiently, leading to faster homogenization.
-    \item \textbf{Low \(J\)} – the jet dominates and penetrates fully across the pipe, resulting in rapid but locally intense mixing.
-\end{itemize}
+
+**High \(J\)** – the crossflow dominates, and the jet hugs the wall. Mixing is slow and requires a long downstream length.
+**Moderate \(J\)** – the jet and crossflow have comparable momentum. The CVP folds the interface efficiently, leading to faster homogenization.
+**Low \(J\)** – the jet dominates and penetrates fully across the pipe, resulting in rapid but locally intense mixing.
+
 
 Hydrogen blending studies show a similar dependence on momentum ratio \cite{Tian2025}.  
 At 10\% H$_2$, the required mixing length is roughly \(100D\), while at 25\% H$_2$ it drops to about \(21D\).  
