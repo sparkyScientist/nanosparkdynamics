@@ -2,7 +2,7 @@
 layout: post
 title: "Mixing in T-Junctions: Momentum Ratios, Vortices, and Design Insights"
 date: 2025-09-08
-image: "assets/TJunction_Mixing.png"
+image: "assets/T_junction_CFD_Header_image.png"
 image_alt: "Schematic of jet-in-crossflow mixing in a T-junction"
 summary: "A deep dive into how the counter-rotating vortex pair (CVP) and momentum ratio J govern mixing in T-junctions."
 ---
@@ -40,36 +40,91 @@ Experiments using **PIV** and **PLIF** ([Pan et al., 2001](https://www.eng.buffa
 - **Shear-Layer Vortices:** Kelvin–Helmholtz instabilities at the jet edge — critical for near-field entrainment.  
 - **Horseshoe and Wake Vortices:** wrap around the jet base and trail downstream, adding unsteadiness and small-scale stirring ([Zhang & Yang, 2017](https://www.yang.gatech.edu/publications/Journal/JGTP%20(2017,%20Zhang,%20JICF%201).pdf)).  
 
-**Insert Figure 1:** *Schematic from presentation showing CVP, shear-layer vortices, and horseshoe vortices around the branch jet.*  
+![Key structures]({{'assets/Key_structures_T_junction.png'| relative_url }})  
+
+*Figure 1: Schematic from presentation showing CVP, shear-layer vortices, and horseshoe vortices around the branch jet.*  
 
 ---
 
 ## Flow Regimes vs. Momentum Balance
 
+Classic experiments by Kok & van der Wal (1996)
+ revealed three distinct flow regimes that arise from the competition between the branch jet and the main crossflow.
+In their study, the momentum ratio was defined as
 The literature identifies three characteristic regimes ([Kok & van der Wal, 1996](https://ris.utwente.nl/ws/files/6962970/kok96mixing.pdf)):
 
-1. **Wall-Jet Regime (large \(J\)):** jet bends and clings to the wall → poor mixing.  
-   - *Insert Figure 2a: COMSOL concentration contour at high crossflow-to-jet velocity ratio, showing wall-attached jet (qualitatively corresponding to high \(J\)).*  
-2. **Deflected Jet Regime (moderate \(J\)):** jet penetrates, CVP develops → efficient mixing.  
-   - *Insert Figure 2b: COMSOL contour at moderate velocity ratio, showing kidney-shaped CVP (qualitative moderate \(J\)).*  
-3. **Impinging Jet Regime (small \(J\)):** jet strikes the opposite wall → rapid mixing, but with higher pressure drop and thermal striping risks.  
-   - *Insert Figure 2c: COMSOL contour at low velocity ratio, showing impingement (qualitative small \(J\)).*  
+\[
+Mr = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2}
+\]
+
+where higher Mr corresponds to a stronger jet.
+In this post, I use the inverse convention,
+
+\[
+J = \frac{\rho_\text{cross} U_\text{cross}^2}{\rho_\text{jet} U_\text{jet}^2} = \frac{1/Mr}
+\]
+so that increasing J indicates a stronger crossflow (and weaker jet).
+
+Figure 2 below, adapted from Kok & van der Wal (1996), shows the three canonical regimes as observed experimentally:
+
+Wall-Jet Regime (high J, low Mr) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
+
+Deflected-Jet Regime (moderate J, moderate Mr) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
+
+Impinging-Jet Regime (low J, high Mr) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
+
+![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
+*Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
+    The authors define \( M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2} \); 
+    here \( J = \frac{1}{M_R} \), so the horizontal ordering (wall $\rightarrow$ deflected $\rightarrow$ impinging) 
+    corresponds to increasing jet strength and decreasing \( J \).*
+
+
+
+To connect these experimental observations with my numerical work, Figure 3 below show COMSOL velocity–magnitude contours and streamlines at two representative conditions:
+
+High J – crossflow-dominated case (N₂ = 3000 sccm, H₂ = 2000 sccm)
+The jet bends sharply and remains attached to the wall, matching the “wall-jet” behavior seen experimentally.
+
+Moderate J – balanced momentum case (N₂ = 1457 sccm, H₂ = 500 sccm)
+The jet penetrates into the main stream and rolls up into a kidney-shaped CVP, consistent with the “deflected-jet” regime.
+
+![Flow momentum]({{'assets/Flow_vs_Momentum_fig3.png'| relative_url }})  
+*Figure 3. {High \(J\)} – crossflow-dominated case (N$_2$ = 3000 sccm, N$_2$ = 2000 sccm).  
+    The jet bends sharply and remains attached to the wall, matching the “wall-jet” behavior seen experimentally.
+{Moderate \(J\)} – balanced momentum case (N$_2$ = 1457 sccm, H$_2$ = 500 sccm).  
+    The jet penetrates into the main stream and rolls up into a kidney-shaped CVP, consistent with the “deflected-jet” regime.*
 
 ⚠️ *Note: My COMSOL simulations were parameterized by jet-to-crossflow **velocity ratios**, not explicit momentum ratios. Still, the qualitative transitions align directly with the regimes mapped in literature against \(J\).*  
+
 
 ---
 
 ## Mixing Metrics: From CV to Mixing Length
 
-The **Coefficient of Variation (COV)** of concentration is a common performance measure.  
-A mixture is considered “uniform” when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899)).  
+While the flow regimes describe how the jet and crossflow interact, the actual efficiency of mixing can be captured more quantitatively.  
+A common measure is the \textbf{Coefficient of Variation (COV)}, which compares the standard deviation of concentration to its mean value:
 
-Hydrogen blending studies highlight how strongly mixing depends on momentum ratio ([Tian et al., 2025](https://www.mdpi.com/1996-1944/18/8/1879)):
+\[
+\text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
+\]
 
-- At **10% H₂**, required mixing length ≈ 100D.  
-- At **25% H₂**, required mixing length ≈ 21D.  
+Here, \(C\) is the local concentration, \(\overline{C}\) is the mean value across the cross-section, and \(\sigma_C\) is the standard deviation.  
+A perfectly mixed flow has \(\text{COV} = 0\), while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899))..
 
-**Insert Figure 3:** *Line plot from COMSOL simulations showing COV vs. downstream distance for different jet-to-crossflow velocity ratios. Overlay reference threshold COV=0.05. These trends qualitatively correspond to the role of \(J\) in shortening mixing length.*  
+In a T-junction, \(\text{COV}\) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
+The rate at which this happens depends strongly on the momentum ratio \(J\):
+
+\begin{itemize}
+    \item \textbf{High \(J\)} – the crossflow dominates, and the jet hugs the wall. Mixing is slow and requires a long downstream length.
+    \item \textbf{Moderate \(J\)} – the jet and crossflow have comparable momentum. The CVP folds the interface efficiently, leading to faster homogenization.
+    \item \textbf{Low \(J\)} – the jet dominates and penetrates fully across the pipe, resulting in rapid but locally intense mixing.
+\end{itemize}
+
+Hydrogen blending studies show a similar dependence on momentum ratio \cite{Tian2025}.  
+At 10\% H$_2$, the required mixing length is roughly \(100D\), while at 25\% H$_2$ it drops to about \(21D\).  
+This same trend appears in my COMSOL simulations — stronger jets (lower \(J\)) mix quickly, whereas crossflow-dominated configurations (higher \(J\)) require a much longer channel to achieve uniformity.
+
 
 ---
 
@@ -80,7 +135,6 @@ Hydrogen blending studies highlight how strongly mixing depends on momentum rati
 3. **Geometry tweaks help, but momentum dominates.** Injection angle, upstream elbows, and branch protrusion improve efficiency ([Ansah et al., 2024](https://www.scirp.org/journal/paperinformation?paperid=137132)).  
 4. **Density differences complicate things.** Light gases stratify unless jet momentum is sufficient ([Mixing of dense/light gases model](https://www.researchgate.net/publication/240624873_MIXING_OF_DENSE_OR_LIGHT_GASES_WITH_TURBULENT_AIR_A_FAST-RUNNING_MODEL_FOR_LUMPED_PARAMETER_CODES)).  
 
-**Insert Figure 4:** *Schematic from presentation showing different injection angles and their effect on jet penetration.*
 
 ---
 
