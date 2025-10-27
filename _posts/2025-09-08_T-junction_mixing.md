@@ -48,10 +48,9 @@ Experiments using **PIV** and **PLIF** ([Pan et al., 2001](https://www.eng.buffa
 
 ## Flow Regimes vs. Momentum Balance
 
-Classic experiments by Kok & van der Wal (1996)
+Classic experiments by Kok & van der Wal (1996) ([Kok & van der Wal, 1996](https://ris.utwente.nl/ws/files/6962970/kok96mixing.pdf))
  revealed three distinct flow regimes that arise from the competition between the branch jet and the main crossflow.
-In their study, the momentum ratio was defined as
-The literature identifies three characteristic regimes ([Kok & van der Wal, 1996](https://ris.utwente.nl/ws/files/6962970/kok96mixing.pdf)):
+In their study, the momentum ratio was defined as :
 
 \[
 Mr = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2}
@@ -61,7 +60,7 @@ where higher Mr corresponds to a stronger jet.
 In this post, I use the inverse convention,
 
 \[
-J = \frac{\rho_\text{cross} U_\text{cross}^2}{\rho_\text{jet} U_\text{jet}^2} = \frac{1/Mr}
+J = \frac{\rho_\text{cross} U_\text{cross}^2}{\rho_\text{jet} U_\text{jet}^2} = \frac{1}{M_R}
 \]
 so that increasing J indicates a stronger crossflow (and weaker jet).
 
