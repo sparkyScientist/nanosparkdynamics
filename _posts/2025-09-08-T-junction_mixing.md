@@ -10,7 +10,7 @@ summary: "A deep dive into how the counter-rotating vortex pair (CVP) and moment
 ## Why T-Junctions Matter
 
 The humble T-junction is everywhere: in chemical plants, natural gas pipelines, and even microfluidic devices.  
-At first glance, it’s just a side pipe feeding into a main line. But in reality, a T-junction is a canonical jet-in-crossflow (JICF) problem — one of the most studied yet still rich flow physics cases in fluid dynamics.
+At first glance, it’s just a side pipe feeding into a main line. But in reality, a T-junction is a canonical jet-in-crossflow (JICF) problem - one of the most studied yet still rich flow physics cases in fluid dynamics.
 
 When a branch jet enters a main crossflow, the resulting interaction spawns a series of vortical structures, turbulent cascades, and scalar transport processes that dictate mixing efficiency.  
 
@@ -66,15 +66,15 @@ so that increasing J indicates a stronger crossflow (and weaker jet).
 
 Figure 2 below, adapted from Kok & van der Wal (1996), shows the three canonical regimes as observed experimentally:
 
-Wall-Jet Regime (high J, low M_R) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
+Wall-Jet Regime (high J, low $$M_R$$) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
 
-Deflected-Jet Regime (moderate J, moderate M_R) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
+Deflected-Jet Regime (moderate J, moderate $$M_R$$) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
 
-Impinging-Jet Regime (low J, high M_R) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
+Impinging-Jet Regime (low J, high $$M_R$$) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
 *Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
-    The authors define ( M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2}); here ( J = \frac{1}{M_R} ), so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
+    The authors define $$(M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2})$$ ; here $$(J = \frac{1}{M_R})$$, so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
 
 
 
@@ -106,10 +106,10 @@ $$
 \text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
 $$
 
-Here, \(C\) is the local concentration, (\overline{C}\) is the mean value across the cross-section, and (\sigma_C\) is the standard deviation.  
-A perfectly mixed flow has COV = 0, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899))..
+Here, \(C\) is the local concentration, $$(\overline{C})$$ is the mean value across the cross-section, and $$(\sigma_C\)$$ is the standard deviation.  
+A perfectly mixed flow has COV = 0, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899)).
 
-In a T-junction, \(COV\) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
+In a T-junction, \(COV) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
 The rate at which this happens depends strongly on the momentum ratio \(J\):
 
 
@@ -140,9 +140,7 @@ This same trend appears in my COMSOL simulations — stronger jets (lower \(J\))
 A T-junction is deceptively simple but hides rich vortex dynamics.  
 By reframing the momentum ratio as **crossflow vs. jet**, the regimes become intuitive: the outcome depends on which stream “wins” the momentum battle.  
 
-Even though my COMSOL simulations did not directly calculate \(J\), the velocity-ratio sweeps clearly reproduce the same qualitative regimes reported in literature — making the physics vivid and bridging numerical work with experimental observations.  
-
-In future posts, I’ll expand into **coaxial injectors** and **hybrid T-junction/coaxial designs**, where shear layers, swirl, and crossflow vortices combine to push mixing performance even further.  
+Even though my COMSOL simulations did not directly calculate \(J\), the velocity-ratio sweeps clearly reproduce the same qualitative regimes reported in literature - making the physics vivid and bridging numerical work with experimental observations.  
 
 ---
 
