@@ -9,7 +9,7 @@ summary: "A rigorous, mathematically grounded exploration of how simulation dime
 
 ## Introduction
 
-The choice between 2D and 3D modeling in CFD isn’t just about computational cost — it’s a decision about which **physical phenomena** you allow or suppress.  
+The choice between 2D and 3D modeling in CFD isn’t just about computational cost — it’s a decision about which physical phenomena you allow or suppress.  
 Dimensionality defines the mathematical lens through which we observe flow physics.  
 In this post, I take a deep dive into how 2D planar, 2D axisymmetric, and 3D formulations reshape the Navier–Stokes equations, alter the spectrum of instabilities, and dictate whether a flow remains symmetric or spontaneously breaks it — with direct implications for jet stability and FCCVD reactor modeling.
 
@@ -17,7 +17,7 @@ In this post, I take a deep dive into how 2D planar, 2D axisymmetric, and 3D for
 
 ## The Governing Equations: A Foundation in Physics and Mathematics
 
-The foundation of nearly all computational fluid dynamics (CFD) problems is the set of **Navier–Stokes equations**, which express conservation of mass, momentum, and energy.  
+The foundation of nearly all computational fluid dynamics (CFD) problems is the set of Navier–Stokes equations, which express conservation of mass, momentum, and energy.  
 For an incompressible, Newtonian fluid, these equations in vector form are:
 
 **Conservation of Mass (Continuity):**
@@ -32,7 +32,7 @@ $$
 $$
 
 Here, $\rho$ is density, $\mathbf{u}$ is velocity, $p$ is pressure, $\mu$ is dynamic viscosity, and $\mathbf{f}_b$ represents body forces such as gravity.  
-These coupled, nonlinear PDEs govern fluid motion — and the choice of simulation dimensionality imposes profound **mathematical constraints** that determine which physical instabilities the solver can or cannot express.
+These coupled, nonlinear PDEs govern fluid motion — and the choice of simulation dimensionality imposes profound mathematical constraints that determine which physical instabilities the solver can or cannot express.
 
 ---
 
@@ -43,26 +43,26 @@ Understanding this filtering is critical to interpreting simulation results corr
 
 ### 3D Simulations — The Unconstrained Reality
 A full three-dimensional model solves the governing equations in all spatial dimensions (Cartesian $(x, y, z)$ or cylindrical $(r, \theta, z)$).  
-It is the only framework that captures **vortex stretching**, a uniquely three-dimensional mechanism where eddies elongate and amplify their vorticity — the cornerstone of the turbulent energy cascade.  
-3D models are therefore essential for scale-resolving approaches such as LES or DNS and are the only ones capable of capturing **non-symmetric modes** like jet flapping, helical instabilities, or asymmetric entrainment.
+It is the only framework that captures vortex stretching, a uniquely three-dimensional mechanism where eddies elongate and amplify their vorticity — the cornerstone of the turbulent energy cascade.  
+3D models are therefore essential for scale-resolving approaches such as LES or DNS and are the only ones capable of capturing non-symmetric modes like jet flapping, helical instabilities, or asymmetric entrainment.
 
 ### 2D Axisymmetric Simulations — The Rotational Symmetry Constraint
 Axisymmetric models impose $\frac{\partial}{\partial \theta} = 0$ and $u_\theta = 0$ in cylindrical coordinates.  
 This removes all azimuthal dependence, eliminating any instability that breaks rotational symmetry (i.e., all $m \neq 0$ modes).  
-As a result, such models can only exhibit **varicose (m = 0)** modes — symmetric expansions and contractions — and completely suppress lateral deflection or helical motion.  
+As a result, such models can only exhibit varicose (m = 0) modes — symmetric expansions and contractions — and completely suppress lateral deflection or helical motion.  
 They are valuable for capturing mean flow behavior but mathematically incapable of describing symmetry-breaking phenomena.
 
 ### 2D Planar Simulations — The Infinite-Span Approximation
 Planar models assume $\frac{\partial}{\partial z} = 0$ and $w = 0$ in Cartesian space, enforcing uniformity in the out-of-plane direction.  
-This prohibition of vortex stretching changes turbulence dynamics fundamentally, often leading to an **inverse energy cascade** where energy accumulates at larger scales.  
-However, planar models allow **in-plane asymmetries** to develop freely, making them powerful tools for studying jet deflection, Coandă attachment, and the onset of lateral instabilities.
+This prohibition of vortex stretching changes turbulence dynamics fundamentally, often leading to an inverse energy cascade where energy accumulates at larger scales.  
+However, planar models allow in-plane asymmetries to develop freely, making them powerful tools for studying jet deflection, Coandă attachment, and the onset of lateral instabilities.
 
 ---
 
 ## The Physics of Symmetry Breaking: A Pitchfork Bifurcation, Not a Bug
 
-A striking feature of 2D planar simulations is that a perfectly symmetric jet often converges to a **wall-attached, asymmetric state**, even with symmetric geometry and boundary conditions.  
-This is not a numerical artifact — it is the correct manifestation of a **supercritical pitchfork bifurcation**, a fundamental symmetry-breaking mechanism in fluid dynamics.
+A striking feature of 2D planar simulations is that a perfectly symmetric jet often converges to a wall-attached, asymmetric state, even with symmetric geometry and boundary conditions.  
+This is not a numerical artifact — it is the correct manifestation of a supercritical pitchfork bifurcation, a fundamental symmetry-breaking mechanism in fluid dynamics.
 
 Near the bifurcation point, the flow dynamics can be described by the **normal form equation**:
 $$
@@ -84,8 +84,8 @@ This is the mathematical expression of the **Coandă effect**, where the low-pre
 ## Implications for FCCVD Reactor Modeling: The Role of Buoyancy
 
 These mathematical ideas are not abstract — they appear directly in real chemical reactors, where flow symmetry governs particle dynamics and product quality.  
-In high-temperature Floating Catalyst Chemical Vapor Deposition (FCCVD) systems, **buoyancy forces** complicate the picture further.  
-Here, the flow is governed by **mixed convection**, where both inertia and buoyancy matter. Their relative importance is expressed through two key dimensionless numbers:
+In high-temperature Floating Catalyst Chemical Vapor Deposition (FCCVD) systems, buoyancy forces complicate the picture further.  
+Here, the flow is governed by mixed convection, where both inertia and buoyancy matter. Their relative importance is expressed through two key dimensionless numbers:
 
 **Reynolds Number (Re):**
 $$
@@ -109,7 +109,7 @@ $$
 $$
 
 However, for large temperature differences (as in FCCVD), even this approximation breaks down, and the density–momentum coupling must be modeled directly.  
-Regardless of formulation, the resulting buoyancy-driven flow **violates the axisymmetric assumption** ($\partial / \partial \theta = 0$), rendering 2D axisymmetric models fundamentally incapable of resolving the real, asymmetric convection patterns.
+Regardless of formulation, the resulting buoyancy-driven flow violates the axisymmetric assumption ($\partial / \partial \theta = 0$), rendering 2D axisymmetric models fundamentally incapable of resolving the real, asymmetric convection patterns.
 
 ---
 
@@ -135,7 +135,7 @@ Regardless of formulation, the resulting buoyancy-driven flow **violates the axi
 
 ## Closing Thoughts
 
-Dimensionality in CFD is not just a technical parameter — it is a **philosophical choice** about how much of nature’s complexity we permit our models to express.  
+Dimensionality in CFD is not just a technical parameter — it is a philosophical choice about how much of nature’s complexity we permit our models to express.  
 Every constraint filters reality, and every dimension we drop changes the story the equations are allowed to tell.
 
 ---
