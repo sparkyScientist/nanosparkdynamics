@@ -74,9 +74,7 @@ Impinging-Jet Regime (low J, high M_R) – the jet momentum dominates, crossing 
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
 *Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
-    The authors define $$( M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2})$$; 
-    here $$( J = \frac{1}{M_R} )$$, so the horizontal ordering (wall - deflected - impinging) 
-    corresponds to increasing jet strength and decreasing \( J \).*
+    The authors define ( M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2}); here ( J = \frac{1}{M_R} ), so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
 
 
 
@@ -108,10 +106,10 @@ $$
 \text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
 $$
 
-Here, \(C\) is the local concentration, \(\overline{C}\) is the mean value across the cross-section, and $$(\sigma_C\)$$ is the standard deviation.  
-A perfectly mixed flow has $$(\text{COV} = 0\)$$, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899))..
+Here, \(C\) is the local concentration, (\overline{C}\) is the mean value across the cross-section, and (\sigma_C\) is the standard deviation.  
+A perfectly mixed flow has COV = 0, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899))..
 
-In a T-junction, $$(\text{COV}\)$$ decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
+In a T-junction, \(COV\) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
 The rate at which this happens depends strongly on the momentum ratio \(J\):
 
 
@@ -121,7 +119,7 @@ The rate at which this happens depends strongly on the momentum ratio \(J\):
 
 
 Hydrogen blending studies show a similar dependence on momentum ratio \cite{Tian2025}.  
-At 10\% H_2, the required mixing length is roughly \(100D\), while at 25\% H_2 it drops to about \(21D\).  
+At 10\% H₂, the required mixing length is roughly \(100D\), while at 25\% H₂ it drops to about \(21D\).  
 This same trend appears in my COMSOL simulations — stronger jets (lower \(J\)) mix quickly, whereas crossflow-dominated configurations (higher \(J\)) require a much longer channel to achieve uniformity.
 
 
