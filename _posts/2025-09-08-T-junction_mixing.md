@@ -74,7 +74,7 @@ Impinging-Jet Regime (low J, high $$M_R$$) – the jet momentum dominates, cross
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
 *Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
-    The authors define $$(M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2})$$ ; here $$(J = \frac{1}{M_R})$$, so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
+    The authors define $(M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2})$ ; here $(J = \frac{1}{M_R})$, so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
 
 
 
@@ -106,7 +106,7 @@ $$
 \text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
 $$
 
-Here, \(C\) is the local concentration, $$(\overline{C})$$ is the mean value across the cross-section, and $$(\sigma_C)$$ is the standard deviation.  
+Here, \(C\) is the local concentration, $(\overline{C})$ is the mean value across the cross-section, and $(\sigma_C)$ is the standard deviation.  
 A perfectly mixed flow has COV = 0, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899)).
 
 In a T-junction, \(COV) decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
