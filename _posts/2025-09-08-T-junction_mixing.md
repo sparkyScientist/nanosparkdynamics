@@ -66,11 +66,11 @@ so that increasing J indicates a stronger crossflow (and weaker jet).
 
 Figure 2 below, adapted from Kok & van der Wal (1996), shows the three canonical regimes as observed experimentally:
 
-Wall-Jet Regime (high J, low $$M_R$$) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
+Wall-Jet Regime (high J, low $M_R$) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
 
-Deflected-Jet Regime (moderate J, moderate $$M_R$$) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
+Deflected-Jet Regime (moderate J, moderate $M_R$) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
 
-Impinging-Jet Regime (low J, high $$M_R$$) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
+Impinging-Jet Regime (low J, high $M_R$) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
 *Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
