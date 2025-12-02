@@ -31,10 +31,11 @@ $$
 $$
 
 **Momentum**
+
 $$
 \rho\left(\frac{\partial \mathbf{u}}{\partial t}
 + \mathbf{u}\cdot\nabla\mathbf{u}\right)
-= -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b.
+= -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b
 $$
 
 Dimensional assumptions like  
@@ -109,7 +110,7 @@ Any perturbation of the form
 $$
 \tilde{u}(r,z)e^{im\theta}
 $$
-is removed for $(m\neq 0\)$.
+is removed for $(m\neq 0\).$
 
 Continuity reduces to  
 
@@ -445,4 +446,4 @@ These modes:
 |--------------|---------------------------|-------------------------------------------|------------------------------------------------|
 | 3D       | none                      | $all (m\)$            | none                                 |
 | Axisymmetric | $(\partial_\theta, u_\theta\)$ | $(m = 0\) only$       | helical modes, lateral drift, buoyant azimuthal motion |
-| Planar   | $(\partial_z, w\)$         | planar symmetry breaking | vortex stretching, full 3D cascade |
+| Planar   | $(\partial_z, w\)$         | planar symmetry breaking        | vortex stretching, full 3D cascade |
