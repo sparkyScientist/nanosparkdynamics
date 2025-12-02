@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How Dimensionality Shapes Jet Stability and Flow Physics in CFD"
+title: "Understanding How Dimensionality Shapes Jet Stability in CFD"
 date: 2025-10-07
 image: "assets/Jet_dimensionality.png"
 image_alt: "Comparison of jet behavior across 2D and 3D simulations"
@@ -10,16 +10,14 @@ summary: "A detailed and mathematically grounded discussion of how dimensionalit
 ## Introduction
 
 One of the most important choices in any CFD workflow is dimensionality.  
-It seems like a technical decision at first. Use 2D to save time, switch to 3D only when needed.  
-But the more I have worked on mixed convection, jet stability, and FCCVD reactor flows, the more obvious it becomes that dimensionality fundamentally reshapes the physics.
+It often feels like a technical decision at first. Use 2D to save time, switch to 3D when needed.  
+But as I have worked on mixed convection, jet stability, and FCCVD reactor flows, it has become clear that dimensionality fundamentally reshapes the physics.
 
-When we go from 3D to 2D, we are not simply reducing the computational domain.  
-We are modifying the mathematical operator that governs the flow.  
-We are removing derivatives, velocity components, and therefore entire stability pathways.  
+When we go from 3D to 2D, we are not just reducing the computational domain.  
+We are modifying the **mathematical operator** that governs the flow.  
+We are removing derivatives, velocity components, and entire instability pathways.
 
-This post is my attempt to lay out, as clearly as possible, how 2D planar, 2D axisymmetric, and 3D models differ, what each can and cannot represent, and why these choices matter so much for asymmetric jets, buoyancy driven vortices, and FCCVD transport phenomena.
-
-I care about this topic because I’ve seen how easy it is to misinterpret a “symmetric” 2D solution or to misclassify a Coandă deflection as numerical noise. Once you understand how the reduced equations work, these behaviors make complete sense.
+This post lays out, as clearly as possible, how 2D planar, 2D axisymmetric, and 3D models differ, what each can and cannot represent, and why these choices matter for asymmetric jets, buoyancy-driven vortices, and FCCVD transport.
 
 ---
 
@@ -28,34 +26,30 @@ I care about this topic because I’ve seen how easy it is to misinterpret a “
 Everything starts from the incompressible Navier–Stokes equations.
 
 **Continuity**
-
 $$
 \nabla \cdot \mathbf{u} = 0
 $$
 
 **Momentum**
-
 $$
-\rho\left(\frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right)
-= -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b
-$$
-
-Once we apply dimensional assumptions like
-
-$$
-\frac{\partial}{\partial z}=0,\ w=0
-\quad\text{or}\quad
-\frac{\partial}{\partial \theta}=0,\ u_\theta=0,
+\rho\left(\frac{\partial \mathbf{u}}{\partial t}
++ \mathbf{u}\cdot\nabla\mathbf{u}\right)
+= -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b.
 $$
 
-we modify both:
+Dimensional assumptions like  
+$$
+\frac{\partial}{\partial z}=0,\quad w=0,
+$$
+or  
+$$
+\frac{\partial}{\partial\theta}=0,\quad u_\theta=0,
+$$
+modify both the differential operators and the admissible solutions.
 
-- the differential operators, and  
-- the space of admissible solutions.  
+This restricts instability modes and symmetry-breaking pathways.
 
-This restricts the instability modes and even the symmetry breaking pathways the flow can take.
-
-I like to think of dimensionality as a filter applied to the Navier–Stokes operator.
+I like to think of dimensionality as a **filter applied to the Navier–Stokes operator**.
 
 ---
 
@@ -63,117 +57,104 @@ I like to think of dimensionality as a filter applied to the Navier–Stokes ope
 
 ![Dimensionality filtering diagram]({{ 'assets/COMSOL_post5_f1.png' | relative_url }})
 
-*Figure 1. Dimensionality filtering applied to the Navier–Stokes equations. Going from 3D to axisymmetric removes all azimuthal dependence and all $m \neq 0$ modes. Going from axisymmetric to 2D planar removes out-of-plane gradients and vortex-stretching terms.*
+*Figure 1. Dimensionality filtering applied to the Navier–Stokes equations.*
 
-In 3D cylindrical coordinates $(r,\theta,z)$, velocity is  
-
+In cylindrical coordinates \((r,\theta,z)\),  
+the velocity field is
 $$
 \mathbf{u} = (u_r, u_\theta, u_z),
 $$
-
-and continuity is  
-
+and continuity becomes
 $$
-\frac{1}{r}\frac{\partial (r u_r)}{\partial r}
-+ \frac{1}{r}\frac{\partial u_\theta}{\partial \theta}
+\frac{1}{r}\frac{\partial(r u_r)}{\partial r}
++ \frac{1}{r}\frac{\partial u_\theta}{\partial\theta}
 + \frac{\partial u_z}{\partial z} = 0.
 $$
 
-The key term that survives only in 3D is vortex stretching:
-
+The term that survives only in 3D is the vortex-stretching term:
 $$
-\boldsymbol{\omega} \cdot \nabla \mathbf{u}.
+\boldsymbol{\omega}\cdot\nabla\mathbf{u}.
 $$
 
-This term drives:
+This drives:
 
 - helical instabilities  
 - jet flapping  
 - azimuthal drift of buoyant plumes  
 - the classical turbulence cascade  
 
-The 3D stability spectrum contains all azimuthal modes $m = 0, 1, 2, \dots$.  
-This is why 3D is the only setting where we see the familiar $m=1$ helical jet instability.
+The 3D stability spectrum contains **all** azimuthal modes  
+$$
+m = 0,\,1,\,2,\,\dots
+$$
+
+This is why only 3D simulations can produce the classical \(m=1\) helical jet instability.
 
 ---
 
-## Axisymmetric 2D: The $m=0$ World
+## Axisymmetric 2D: The \(m = 0\) World
 
 ![Instability mode comparison]({{ 'assets/COMSOL_post5_f2.png' | relative_url }})
 
-*Figure 2. Instability mode illustration. A 3D system admits all azimuthal modes $m = 0,1,2,\dots$. Axisymmetric modeling retains only $m=0$. Planar and 3D models allow modes $m \ge 1$, enabling lateral deflection and symmetry breaking.*
+*Figure 2. Axisymmetric modeling retains only \(m=0\) modes.*
 
-Axisymmetry enforces
-
+Axisymmetry imposes
 $$
-\frac{\partial}{\partial \theta}=0, \quad u_\theta=0.
-$$
-
-The consequence is that all perturbations of the form  
-
-$$
-e^{i m \theta},\quad m\neq 0
+\frac{\partial}{\partial\theta}=0, \qquad u_\theta = 0.
 $$
 
-are removed from the operator.
+Any perturbation of the form
+$$
+\tilde{u}(r,z)e^{im\theta}
+$$
+is removed for \(m\neq 0\).
 
-Continuity becomes:
-
+Continuity reduces to
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
-+ \frac{\partial u_z}{\partial z} = 0.
++ \frac{\partial u_z}{\partial z}=0.
 $$
 
-This is why axisymmetric simulations can only produce varicose (breathing) modes.  
-They completely suppress:
+Axisymmetric CFD therefore **cannot** produce:
 
 - helical motion  
 - flapping  
-- any lateral instability  
+- lateral instabilities  
 - buoyancy-induced azimuthal drift  
 
-Axisymmetric CFD is powerful for mean flow predictions.  
-But if the real flow is asymmetric, axisymmetric modeling cannot reveal it.  
-The equations do not allow that solution.
+It is excellent for mean-flow prediction, but cannot reveal asymmetric physics if the real flow is not symmetric.
 
 ---
 
 ## Planar 2D: Limited Physics, But Free Symmetry Breaking
 
-Planar simulations impose  
-
+Planar simulations enforce
 $$
-\frac{\partial}{\partial z}=0, \quad w=0.
+\frac{\partial}{\partial z}=0,\qquad w=0.
 $$
 
-Continuity becomes:
-
+Continuity becomes
 $$
 \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}=0.
 $$
 
-The vorticity reduces to a scalar:
-
+Vorticity becomes a scalar,
 $$
-\omega = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}.
-$$
-
-The vorticity transport equation is:
-
-$$
-\frac{D\omega}{Dt} = \nu\nabla^2 \omega.
+\omega = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y},
 $$
 
-There is no vortex stretching because  
-
+and is governed by
 $$
-(\omega\cdot\nabla)\mathbf{u} = 0.
+\frac{D\omega}{Dt} = \nu\nabla^2\omega.
 $$
 
-Despite this limitation, planar simulations *permit* lateral asymmetry.  
-They are free to break symmetry in the plane because nothing constrains the solutions to remain centered.
+Because vortex stretching vanishes,
+$$
+(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} = 0,
+$$
+planar flows cannot generate 3D cascades.
 
-This is why planar jets exhibit a pitchfork bifurcation.
+But they **can** break symmetry in the plane, which is why a centered jet can deflect left or right.
 
 ---
 
@@ -181,109 +162,95 @@ This is why planar jets exhibit a pitchfork bifurcation.
 
 ![Pitchfork bifurcation]({{ 'assets/COMSOL_post5_F3.png' | relative_url }})
 
-*Figure 3. Supercritical pitchfork bifurcation describing the onset of asymmetry. For $Re < Re_\mathrm{crit}$, the centered jet is stable. For $Re > Re_\mathrm{crit}$, the symmetric branch becomes unstable and two stable wall-attached branches appear.*
+*Figure 3. Supercritical pitchfork bifurcation for jet deflection.*
 
-Near the critical Reynolds number, the slow dynamics of the jet centerline obey:
-
-Near the critical Reynolds number, the slow dynamics of the jet centerline obey:
-
+Near the critical Reynolds number, the jet’s lateral displacement \(u(t)\) is governed by
 $$
 \frac{du}{dt} = r u - u^3,
 $$
-
 with  
-
 $$
-r \propto Re - Re_{\text{crit}}.
+r \propto Re - Re_{\mathrm{crit}}.
 $$
 
 Steady states:
-
 $$
-u^* = 0, \quad u^* = \pm \sqrt{r}.
-$$
-
-Stability from  
-
-$$
-\lambda = r - 3u^2:
+u^* = 0,\qquad u^* = \pm\sqrt{r}.
 $$
 
-- $u=0$ stable for $r<0$  
-- $u=\pm\sqrt{r}$ stable for $r>0$  
+Stability follows from  
+$$
+\lambda = r - 3u^2.
+$$
 
-This is the precise mathematical explanation for Coandă attachment and 2D symmetry breaking.
+So:
 
-It is not numerical noise. It is encoded in the reduced equations.
+- the centered jet (\(u=0\)) is stable for \(r<0\)  
+- the two asymmetric jets (\(u=\pm\sqrt{r}\)) are stable for \(r>0\)  
+
+This is the mathematical origin of Coandă attachment.  
+It is not numerical noise.
 
 ---
 
-## FCCVD and the Role of Buoyancy: Why 3D Is Almost Always Required
+## FCCVD and Buoyancy: Why 3D Is Almost Always Required
 
-FCCVD reactors operate under extremely strong thermal gradients, often exceeding  
-
+FCCVD reactors operate under extremely high thermal gradients, often  
 $$
-\Delta T \sim 800 - 1200\,\text{K}.
-$$
-
-Such temperature differences drive buoyancy forces that significantly reshape the inlet flow.
-
-A convenient measure of buoyancy strength is the **Rayleigh number**:
-
-$$
-Ra = \frac{g\,\beta\,\Delta T\,L^3}{\nu\,\alpha},
+\Delta T \sim 800 - 1200\ \mathrm{K}.
 $$
 
-where $g$ is gravity, $\beta$ is the thermal expansion coefficient, $L$ is a characteristic length scale, $\nu$ is kinematic viscosity, and $\alpha$ is thermal diffusivity.
+A useful measure of buoyancy is the **Rayleigh number**  
+$$
+Ra = \frac{g\beta \Delta T\, L^3}{\nu\alpha}.
+$$
 
-In FCCVD conditions, $Ra$ is typically very large.  
-This places the flow in a buoyancy-dominated mixed-convection regime, where the resulting structures include:
+In FCCVD, \(Ra\) is typically large, which produces:
 
-- drifting asymmetric convection cells  
-- upward or azimuthally drifting hot plumes  
-- large recirculation bubbles  
+- asymmetric convection cells  
+- drifting buoyant plumes  
+- large recirculation regions  
 - lateral migration of catalyst particles  
 
-These structures are inherently three-dimensional because buoyancy drives azimuthal perturbations of the form  
-
+Buoyancy introduces azimuthal perturbations:
 $$
-\tilde{u}(r,z)\,e^{i m\theta},
+\tilde{u}(r,z)e^{im\theta},\qquad m=1,2,\dots
 $$
 
-with $m = 1,2,\dots$.
+Axisymmetric CFD cannot represent these.  
+Planar CFD can show symmetry breaking but cannot show full 3D plume drift.
 
-Axisymmetric modeling is not physically consistent in this regime because the reduced governing equations restrict the solution space to $m = 0$ modes only.  
-Planar simulations can capture symmetry breaking in the plane, but cannot reproduce fully 3D plume drift, mixed-convection vortices, or vortex stretching.
+These effects appear in both **vertical** and **horizontal** reactors.
 
-Whether the reactor is vertical or horizontal, buoyancy produces asymmetric flow fields that cannot be represented in 2D axisymmetric CFD.  
-Below is an example from a horizontal DI-FCCVD reactor, which exhibits the same buoyancy-driven asymmetry and mixed-convection behavior discussed above.
+Below is an example from a horizontal DI-FCCVD reactor.
 
-![Buoyancy-driven mixed convection in a horizontal DI-FCCVD reactor]({{ 'assets/COMSOL_post5_f4.png' | relative_url }})
+![Buoyancy-driven mixed convection]({{ 'assets/COMSOL_post5_f4.png' | relative_url }})
 
-*Figure 4. Buoyancy-driven mixed convection in a **horizontal** deep-injection FCCVD reactor (adapted from Junnarkar et al., Carbon 2025). (Top) Nearly symmetric, inertia-dominated flow. (Bottom) Fully buoyant regime with plume drift and a large asymmetric recirculation cell. These asymmetries arise from $m \ge 1$ azimuthal modes that cannot appear in axisymmetric CFD.*
+*Figure 4. Buoyancy-driven mixed convection in a **horizontal** FCCVD reactor (adapted from Junnarkar et al., Carbon 2025).*
+
+The large plume drift and asymmetric recirculation correspond to \(m\ge1\) modes and require 3D modeling.
 
 ---
 
 ## Closing Thoughts
 
-Dimensionality is a modeling choice that directly determines the physics a simulation can express.  
-2D models are incredibly useful, especially for exploring parameter ranges and identifying transitions.  
-But they also remove entire instability families.
+Dimensionality determines the physics a CFD model can express.  
+2D models are extremely useful for parameter sweeps and transition analysis, but they also remove entire instability families.
 
-The key is to be honest about what each model is capable of and to interpret results in that context.  
-Once you see dimensionality as a filter on the Navier–Stokes equations, the behavior of 2D and 3D jets becomes much easier to understand.
+Once you view dimensionality as a filter on the Navier–Stokes equations, the differences between 2D and 3D simulations become much easier to interpret.
 
 ---
 
 ## References
 
 - [1] Effects of 2D Planar, Axisymmetric, and 3D Simulations on Jet Behavior and Stability  
-- [2] Hou, G. et al. (2016). Carbon nanotube reactor: Ferrocene decomposition, iron particle growth, nanotube aggregation, and scale up  
-- [3] Fearn, R. M., Mullin, T., Cliffe, K. A. (1990). Nonlinear flow phenomena in a symmetric sudden expansion. J. Fluid Mech.  
-- [4] Strogatz, S. H. Nonlinear Dynamics and Chaos  
-- [5] Anderson, J. D. Computational Fluid Dynamics  
-- [6] Additional FCCVD modeling insights from recent unpublished simulations  
+- [2] Hou, G. et al. *Carbon nanotube reactor: Ferrocene decomposition...*  
+- [3] Fearn, Mullin, Cliffe. *Nonlinear flow phenomena in a symmetric sudden expansion.*  
+- [4] Strogatz. *Nonlinear Dynamics and Chaos.*  
+- [5] Anderson. *Computational Fluid Dynamics.*  
+- [6] Additional unpublished FCCVD simulations  
 - [7] Private communication, Pasquali Research Group  
+
 
 # Supporting Information: Mathematical Structure of Dimensional Reductions of Navier–Stokes
 
