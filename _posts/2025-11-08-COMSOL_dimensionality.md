@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Dimensionality Dilemma in CFD: How 2D and 3D Models Reshape Jet Stability and Flow Physics"
+title: "How Dimensionality Shapes Jet Stability and Flow Physics in CFD"
 date: 2025-10-07
 image: "assets/Jet_dimensionality.png"
 image_alt: "Comparison of jet behavior across 2D and 3D simulations"
