@@ -444,6 +444,6 @@ These modes:
 
 | Model        | Removed Terms             | Allowed Modes                                | Missing Physics                                |
 |--------------|---------------------------|----------------------------------------------|------------------------------------------------|
-| 3D       | none                      | $all (m\)$            | none                                 |
-| Axisymmetric | $(\partial_\theta, u_\theta\)$ | $(m = 0\) only$       | helical modes, lateral drift, buoyant azimuthal motion |
-| Planar   | $(\partial_z, w\)$         | planar symmetry breaking         | vortex stretching and full 3D cascade |
+| 3D       | none                      | $all (m\)$               | none                                 |
+| Axisymmetric | $(\partial_\theta, u_\theta\)$ | $(m = 0\) only$          | helical modes, lateral drift, buoyant azimuthal motion |
+| Planar   | $(\partial_z, w\)$         | planar symmetry breaking            | vortex stretching and full 3D cascade |
