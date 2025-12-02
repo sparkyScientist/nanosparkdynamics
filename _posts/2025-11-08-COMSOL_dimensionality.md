@@ -66,9 +66,10 @@ $$
 $$
 and continuity becomes
 $$
-\frac{1}{r}\frac{\partial(r u_r)}{\partial r}
-+ \frac{1}{r}\frac{\partial u_\theta}{\partial\theta}
-+ \frac{\partial u_z}{\partial z} = 0.
+\frac{1}{r}\frac{\partial (r u_r)}{\partial r}
++ \frac{1}{r}\frac{\partial u_\theta}{\partial \theta}
++ \frac{\partial u_z}{\partial z}
+= 0.
 $$
 
 The term that survives only in 3D is the vortex-stretching term:
@@ -109,10 +110,11 @@ $$
 $$
 is removed for \(m\neq 0\).
 
-Continuity reduces to
+Continuity reduces to  
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
-+ \frac{\partial u_z}{\partial z}=0.
++ \frac{\partial u_z}{\partial z}
+= 0.
 $$
 
 Axisymmetric CFD therefore **cannot** produce:
@@ -133,9 +135,11 @@ $$
 \frac{\partial}{\partial z}=0,\qquad w=0.
 $$
 
-Continuity becomes
+Continuity becomes  
 $$
-\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}=0.
+\frac{\partial u}{\partial x}
++ \frac{\partial v}{\partial y}
+= 0.
 $$
 
 Vorticity becomes a scalar,
@@ -185,8 +189,8 @@ $$
 
 So:
 
-- the centered jet (\(u=0\)) is stable for \(r<0\)  
-- the two asymmetric jets (\(u=\pm\sqrt{r}\)) are stable for \(r>0\)  
+- the centered jet ($(u=0\)$) is stable for $(r<0\)$  
+- the two asymmetric jets ($(u=\pm\sqrt{r}\)$) are stable for $(r>0\)$ 
 
 This is the mathematical origin of Coandă attachment.  
 It is not numerical noise.
@@ -252,14 +256,14 @@ Once you view dimensionality as a filter on the Navier–Stokes equations, the d
 - [7] Private communication, Pasquali Research Group  
 
 
-# Supporting Information: Mathematical Structure of Dimensional Reductions of Navier–Stokes
+## Supporting Information: Mathematical Structure of Dimensional Reductions of Navier–Stokes
 
 ## 1. Full 3D Navier–Stokes (Cylindrical Coordinates)
 
 Velocity:
 
 $$
-\mathbf{u} = (u_r, u_\theta, u_z).
+\mathbf{u} = (u_r, u_\theta, u_z)
 $$
 
 Continuity:
@@ -267,19 +271,20 @@ Continuity:
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
 + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta}
-+ \frac{\partial u_z}{\partial z} = 0.
++ \frac{\partial u_z}{\partial z}
+= 0
 $$
 
 Vorticity:
 
 $$
-\boldsymbol{\omega} = \nabla \times \mathbf{u}.
+\boldsymbol{\omega} = \nabla \times \mathbf{u}
 $$
 
 Vortex stretching term:
 
 $$
-\boldsymbol{\omega}\cdot\nabla\mathbf{u}.
+(\boldsymbol{\omega}\cdot\nabla)\mathbf{u}
 $$
 
 Nonzero only in 3D.
@@ -291,31 +296,38 @@ Nonzero only in 3D.
 Constraints:
 
 $$
-\frac{\partial}{\partial \theta}=0, \quad u_\theta=0.
+\frac{\partial}{\partial \theta} = 0,
+\qquad
+u_\theta = 0
 $$
 
 Continuity reduces to:
 
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
-+ \frac{\partial u_z}{\partial z} = 0.
++ \frac{\partial u_z}{\partial z}
+= 0
 $$
 
-Linearized perturbations of the form  
+Linearized perturbations of the form
 
 $$
 \tilde{u}(r,z)\,e^{i m \theta}
 $$
 
-are only admissible for $m=0$.
+are only admissible for
+
+$$
+m = 0
+$$
 
 Axisymmetric operator:
 
 $$
-L_{\text{axi}} = L_{m=0}.
+L_{\text{axi}} = L_{m=0}
 $$
 
-All helical $m=1$ and higher modes are removed.
+All helical \(m = 1\) and higher azimuthal modes are removed.
 
 ---
 
@@ -324,101 +336,110 @@ All helical $m=1$ and higher modes are removed.
 Constraints:
 
 $$
-\frac{\partial}{\partial z}=0,
-\quad w=0.
+\frac{\partial}{\partial z} = 0,
+\qquad
+w = 0
 $$
 
 Continuity:
 
 $$
 \frac{\partial u}{\partial x}
-+ \frac{\partial v}{\partial y} = 0.
++ \frac{\partial v}{\partial y}
+= 0
 $$
 
 Scalar vorticity:
 
 $$
 \omega = \frac{\partial v}{\partial x}
-- \frac{\partial u}{\partial y}.
+- \frac{\partial u}{\partial y}
 $$
 
 Vorticity transport:
 
 $$
-\frac{D\omega}{Dt} = \nu\nabla^2\omega.
+\frac{D\omega}{Dt} = \nu \nabla^2 \omega
 $$
 
-No stretching term:
+No vortex stretching:
 
 $$
-(\omega\cdot\nabla)\mathbf{u}=0.
+(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} = 0
 $$
 
-Planar systems admit symmetry breaking in the plane but cannot develop 3D cascades.
+Planar 2D systems allow symmetry breaking in the plane but cannot develop 3D cascades.
 
 ---
 
 ## 4. Pitchfork Bifurcation Derivation
 
-Let $u(t)$ be the lateral jet displacement.  
-Center manifold reduction of the full Navier–Stokes around the symmetric state yields
+Let \(u(t)\) be the lateral jet displacement.
+
+Center manifold reduction yields:
 
 $$
-\frac{du}{dt} = r u - u^3.
+\frac{du}{dt} = r u - u^3
 $$
 
 Steady states:
 
 $$
-u^*(0)=0,\quad u^*(\pm)=\pm\sqrt{r}.
+u^* = 0,
+\qquad
+u^* = \pm\sqrt{r}
 $$
 
 Jacobian:
 
 $$
-\lambda(u^*) = r - 3{u^*}^2.
+\lambda(u^*) = r - 3 (u^*)^2
 $$
 
 Thus:
 
-- stable for $u=0, r<0$  
-- unstable for $u=0, r>0$  
-- stable for $\pm\sqrt{r}$  
+- \(u^* = 0\) is stable for \(r < 0\)
+- \(u^* = 0\) is unstable for \(r > 0\)
+- \(u^* = \pm\sqrt{r}\) are stable for \(r > 0\)
+
+This is the canonical supercritical pitchfork bifurcation underlying 2D jet deflection.
 
 ---
 
 ## 5. Buoyancy Driven Mixed Convection in FCCVD
 
-The relevant nondimensional measure of buoyancy strength in FCCVD systems is the **Rayleigh number**:
+The relevant nondimensional group is the Rayleigh number:
 
 $$
-Ra = \frac{g\beta\Delta T L^3}{\nu\alpha}.
+Ra = \frac{g\,\beta\,\Delta T\,L^3}{\nu\,\alpha}
 $$
 
-Typical reactor conditions produce:
+FCCVD conditions typically give:
 
 $$
-Ra \gg 10000,
+Ra \gg 10^4
 $$
 
-consistent with strong thermal buoyancy and mixed-convection behavior.
-
-The buoyant plume generates azimuthal perturbations of the form
+Buoyancy generates azimuthal perturbations of the form:
 
 $$
 \tilde{u}(r,z)\,e^{i m\theta},
+\qquad
+m = 1, 2, \ldots
 $$
 
-with $m = 1,2$.  
-These modes cannot exist in 2D axisymmetric CFD, which enforces $m = 0$.  
-Planar simulations allow in-plane symmetry breaking but cannot represent 3D vortex stretching or fully coupled mixed-convection structures.
+These modes:
+
+- cannot appear in axisymmetric simulations (\(m = 0\) enforced)
+- appear fully in 3D
+- appear partially in planar 2D (but without 3D vortex stretching)
 
 ---
 
 ## 6. Summary Table
 
-| Model       | Removed Terms         | Allowed Modes | Missing Physics                          |
-|------------|-----------------------|---------------|-----------------------------------------|
-| 3D         | none                  | all $m$       | none                                    |
-| Axisymmetric | $(\partial_\theta, u_\theta)$ | $m=0$ only   | lateral, helical, buoyancy drift        |
-| Planar     | $(\partial_z, w)$     | planar symmetry breaking | vortex stretching, 3D cascade |
+| Model        | Removed Terms             | Allowed Modes        | Missing Physics                      |
+|--------------|---------------------------|-----------------------|--------------------------------------|
+| 3D       | none                      | all \(m\)            | none                                 |
+| Axisymmetric | \(\partial_\theta, u_\theta\) | \(m = 0\) only       | helical modes, lateral drift, buoyant azimuthal motion |
+| Planar   | \(\partial_z, w\)         | planar symmetry breaking | vortex stretching, full 3D cascade |
