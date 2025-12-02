@@ -49,7 +49,7 @@ we modify both:
 - the differential operators, and  
 - the space of admissible solutions.  
 
-This restricts the **instability modes** and even the **symmetry breaking pathways** the flow can take.
+This restricts the instability modes and even the symmetry breaking pathways the flow can take.
 
 I like to think of dimensionality as a filter applied to the Navier–Stokes operator.
 
@@ -83,16 +83,16 @@ This term drives:
 - azimuthal drift of buoyant plumes  
 - the classical turbulence cascade  
 
-The 3D stability spectrum contains all azimuthal modes \(m = 0, 1, 2, \dots\).  
+The 3D stability spectrum contains all azimuthal modes $(m = 0, 1, 2, \dots\)$.  
 This is why 3D is the only setting where we see the familiar \(m=1\) helical jet instability.
 
 ---
 
-## Axisymmetric 2D: The \(m=0\) World
+## Axisymmetric 2D: The (m=0\) World
 
 ![Instability mode comparison]({{ 'assets/COMSOL_post5_f2.png' | relative_url }})
 
-*Figure 2. Instability mode illustration. A 3D system admits all azimuthal modes \(m = 0,1,2,\dots\). Axisymmetric modeling retains only \(m=0\). Planar and 3D models allow modes \(m \ge 1\), enabling lateral deflection and symmetry breaking.*
+*Figure 2. Instability mode illustration. A 3D system admits all azimuthal modes $(m = 0,1,2,\dots\)$. Axisymmetric modeling retains only \(m=0\). Planar and 3D models allow modes $(m \ge 1\)$, enabling lateral deflection and symmetry breaking.*
 Axisymmetry enforces
 $$
 \frac{\partial}{\partial \theta}=0, \quad u_\theta=0.
@@ -110,7 +110,7 @@ $$
 + \frac{\partial u_z}{\partial z} = 0.
 $$
 
-This is why axisymmetric simulations can only produce **varicose** (breathing) modes.  
+This is why axisymmetric simulations can only produce varicose (breathing) modes.  
 They completely suppress:
 
 - helical motion  
@@ -162,7 +162,7 @@ This is why planar jets exhibit a pitchfork bifurcation.
 
 ![Pitchfork bifurcation]({{ 'assets/COMSOL_post5_F3.png' | relative_url }})
 
-*Figure 3. Supercritical pitchfork bifurcation describing the onset of asymmetry. For \(Re < Re_\mathrm{crit}\), the centered jet is stable. For \(Re > Re_\mathrm{crit}\), the symmetric branch becomes unstable and two stable wall-attached branches appear.*
+*Figure 3. Supercritical pitchfork bifurcation describing the onset of asymmetry. For $(Re < Re_\mathrm{crit}\)$, the centered jet is stable. For $(Re > Re_\mathrm{crit}\)$, the symmetric branch becomes unstable and two stable wall-attached branches appear.*
 
 Near the critical Reynolds number, the slow dynamics of the jet centerline obey:
 
@@ -185,53 +185,51 @@ $$
 \lambda = r - 3u^2:
 $$
 
-- \(u=0\) stable for \(r<0\)  
-- $(u=\pm\sqrt{r}\)$ stable for \(r>0\)  
+- $(u=0\)$ stable for $(r<0\)$ 
+- $(u=\pm\sqrt{r}\)$ stable for $(r>0\)$  
 
 This is the precise mathematical explanation for Coandă attachment and 2D symmetry breaking.
 
 It is not numerical noise. It is encoded in the reduced equations.
 
 ---
+## FCCVD and the Role of Buoyancy: Why 3D Is Almost Always Required
 
-## FCCVD and the Role of Buoyancy: Why 3D is Almost Always Required
+FCCVD reactors operate under extremely strong thermal gradients, often exceeding  
+$$
+\Delta T \sim 800 - 1200\,\text{K}.
+$$
+Such temperature differences drive buoyancy forces that significantly reshape the inlet flow.
 
-FCCVD reactors operate with extreme thermal gradients.  
-It is not uncommon to have  
+A convenient measure of buoyancy strength is the **Rayleigh number**:
 $$
-\Delta T > 1000\,\text{K}.
+Ra = \frac{g\,\beta\,\Delta T\,L^3}{\nu\,\alpha},
 $$
+where $(g\)$ is gravity, $(\beta\)$ is the thermal expansion coefficient, $(L\)$ is a characteristic length scale, $(\nu\)$ is kinematic viscosity, and $(\alpha\)$ is thermal diffusivity.
 
-The Grashof number:
-$$
-Gr = \frac{g\beta\Delta T L^3}{\nu^2},
-$$
-and the Richardson number:
-$$
-Ri = \frac{Gr}{Re^2},
-$$
-are usually very large.
-
-When $(Ri\gg 1\)$, buoyancy dominates inertia.  
-The resulting structures are:
+In FCCVD conditions, $(Ra\)$ is typically very large.  
+This places the flow in a buoyancy-dominated mixed-convection regime, where the resulting structures include:
 
 - drifting asymmetric convection cells  
-- azimuthally unstable plumes  
+- upward or azimuthally drifting hot plumes  
+- large recirculation bubbles  
 - lateral migration of catalyst particles  
-- extended residence times  
 
-All of these are inherently 3D.  
-Axisymmetric modeling is not physically consistent here because buoyancy produces \(m=1\) and \(m=2\) plumes that the equations are not allowed to represent.
+These structures are inherently three-dimensional because buoyancy drives azimuthal perturbations of the form  
+$$
+\tilde{u}(r,z)\,e^{i m\theta},
+$$
+with $(m = 1,2,\dots\)$.
 
-Planar simulations capture symmetry breaking, but not vortex stretching or full mixed convection structure.
+Axisymmetric modeling is not physically consistent in this regime because the reduced governing equations restrict the solution space to $(m = 0\)$ modes only.  
+Planar simulations can capture symmetry breaking in the plane, but cannot reproduce fully 3D plume drift, mixed-convection vortices, or vortex stretching.
 
-Whether the reactor is vertical or horizontal, strong buoyancy forces generate asymmetric mixed-convection structures. In horizontal geometries, these appear as lateral drifting plumes and asymmetric recirculation cells. In vertical reactors, they appear as rising hot plumes that tilt or drift azimuthally. In both cases, the underlying mechanism is the same: buoyancy introduces m=1 and 
-m=2 azimuthal modes that axisymmetric models cannot represent.
-Below is an example from a horizontal DI-FCCVD reactor, which still shows the same buoyancy-driven asymmetry and mixed-convection structure discussed above.
+Whether the reactor is vertical or horizontal, buoyancy produces asymmetric flow fields that cannot be represented in 2D axisymmetric CFD.  
+Below is an example from a horizontal DI-FCCVD reactor, which exhibits the same buoyancy-driven asymmetry and mixed-convection behavior discussed above.
 
 ![Buoyancy-driven mixed convection in a horizontal DI-FCCVD reactor]({{ 'assets/COMSOL_post5_f4.png' | relative_url }})
 
-*Figure 4. Buoyancy-driven mixed convection in a **horizontal** deep-injection FCCVD reactor (adapted from Junnarkar et al., Carbon 2025). (Top) Nearly symmetric, inertia-dominated flow. (Bottom) Fully buoyant mixed-convection regime showing upward plume drift and a large asymmetric recirculation cell. These asymmetries correspond to \(m = 1\) and higher azimuthal modes, which cannot appear in 2D axisymmetric CFD.*
+*Figure 4. Buoyancy-driven mixed convection in a **horizontal** deep-injection FCCVD reactor (adapted from Junnarkar et al., Carbon 2025). (Top) Nearly symmetric, inertia-dominated flow. (Bottom) Fully buoyant regime with plume drift and a large asymmetric recirculation cell. These asymmetries arise from $(m \ge 1\)$ azimuthal modes that cannot appear in axisymmetric CFD.*
 
 
 
@@ -351,7 +349,7 @@ Planar systems admit symmetry breaking in the plane but cannot develop 3D cascad
 
 ## 4. Pitchfork Bifurcation Derivation
 
-Let \(u(t)\) be the lateral jet displacement.  
+Let $(u(t)\)$ be the lateral jet displacement.  
 Center manifold reduction of the full Navier–Stokes around the symmetric state yields
 $$
 \frac{du}{dt} = r u - u^3.
@@ -369,40 +367,40 @@ $$
 
 Thus:
 
-- stable for $(u=0, r<0\) $ 
-- unstable for $(u=0, r>0\) $ 
-- stable for $(\pm\sqrt{r}\)  $
+- stable for $(u=0, r<0\)$ 
+- unstable for $(u=0, r>0\)$ 
+- stable for $(\pm\sqrt{r}\)$
 
 ---
 
 ## 5. Buoyancy Driven Mixed Convection in FCCVD
 
-Nondimensional groups:
+The relevant nondimensional measure of buoyancy strength in FCCVD systems is the **Rayleigh number**:
 $$
-Re = \frac{\rho U L}{\mu},
-\qquad
-Gr = \frac{g\beta\Delta T L^3}{\nu^2},
-\qquad
-Ri = \frac{Gr}{Re^2}.
+Ra = \frac{g\beta\Delta T L^3}{\nu\alpha}.
 $$
 
-For FCCVD:
-- $(\Delta T>1000\) K  
-- $(Gr \gg 10^8\)  
-- $(Ri \gg 1\)  
+Typical reactor conditions produce:
+$$
+Ra \gg 10000,
+$$
+consistent with strong thermal buoyancy and mixed-convection behavior.
 
-Buoyant plumes generate azimuthal instabilities of the form:
+The buoyant plume generates azimuthal perturbations of the form
 $$
-\tilde{u}(r,z)\,e^{im\theta}
+\tilde{u}(r,z)\,e^{i m\theta},
 $$
-with \(m=1,2\). These are inaccessible to axisymmetric models.
+with $(m = 1,2\)$.  
+These modes cannot exist in 2D axisymmetric CFD, which enforces $(m = 0\)$.  
+Planar simulations allow in-plane symmetry breaking but cannot represent 3D vortex stretching or fully coupled mixed-convection structures.
+
 
 ---
 
 ## 6. Summary Table
 
 | Model | Removed Terms | Allowed Modes | Missing Physics |
-|-------|---------------|----------------|------------------|
+|-------|---------------|--------------------------------|--------------------------------|
 | 3D | none | all \(m\) | none |
 | Axisymmetric | $(\partial_\theta, u_\theta\)$ | \(m=0\) only | lateral, helical, buoyancy drift |
 | Planar | $(\partial_z, w\)$ | planar symmetry breaking | vortex stretching, 3D cascade |
