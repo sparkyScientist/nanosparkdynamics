@@ -14,7 +14,7 @@ It often feels like a technical decision at first. Use 2D to save time, switch t
 But as I have worked on mixed convection, jet stability, and FCCVD reactor flows, it has become clear that dimensionality fundamentally reshapes the physics.
 
 When we go from 3D to 2D, we are not just reducing the computational domain.  
-We are modifying the **mathematical operator** that governs the flow.  
+We are modifying the mathematical operator that governs the flow.  
 We are removing derivatives, velocity components, and entire instability pathways.
 
 This post lays out, as clearly as possible, how 2D planar, 2D axisymmetric, and 3D models differ, what each can and cannot represent, and why these choices matter for asymmetric jets, buoyancy-driven vortices, and FCCVD transport.
@@ -49,7 +49,7 @@ modify both the differential operators and the admissible solutions.
 
 This restricts instability modes and symmetry-breaking pathways.
 
-I like to think of dimensionality as a **filter applied to the Navier–Stokes operator**.
+I like to think of dimensionality as a filter applied to the Navier–Stokes operator.
 
 ---
 
@@ -69,7 +69,7 @@ $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
 + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta}
 + \frac{\partial u_z}{\partial z}
-= 0.
+= 0
 $$
 
 The term that survives only in 3D is the vortex-stretching term:
@@ -108,13 +108,13 @@ Any perturbation of the form
 $$
 \tilde{u}(r,z)e^{im\theta}
 $$
-is removed for \(m\neq 0\).
+is removed for $(m\neq 0\)$.
 
 Continuity reduces to  
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
 + \frac{\partial u_z}{\partial z}
-= 0.
+= 0
 $$
 
 Axisymmetric CFD therefore **cannot** produce:
@@ -139,7 +139,7 @@ Continuity becomes
 $$
 \frac{\partial u}{\partial x}
 + \frac{\partial v}{\partial y}
-= 0.
+= 0
 $$
 
 Vorticity becomes a scalar,
@@ -174,23 +174,23 @@ $$
 $$
 with  
 $$
-r \propto Re - Re_{\mathrm{crit}}.
+r \propto Re - Re_{\mathrm{crit}}
 $$
 
 Steady states:
 $$
-u^* = 0,\qquad u^* = \pm\sqrt{r}.
+u^* = 0,\qquad u^* = \pm\sqrt{r}
 $$
 
 Stability follows from  
 $$
-\lambda = r - 3u^2.
+\lambda = r - 3u^2
 $$
 
 So:
 
-- the centered jet ($(u=0\)$) is stable for $(r<0\)$  
-- the two asymmetric jets ($(u=\pm\sqrt{r}\)$) are stable for $(r>0\)$ 
+- the centered jet $((u=0\))$ is stable for $(r<0\)$  
+- the two asymmetric jets $((u=\pm\sqrt{r}\))$ are stable for $(r>0\)$ 
 
 This is the mathematical origin of Coandă attachment.  
 It is not numerical noise.
@@ -201,12 +201,12 @@ It is not numerical noise.
 
 FCCVD reactors operate under extremely high thermal gradients, often  
 $$
-\Delta T \sim 800 - 1200\ \mathrm{K}.
+\Delta T \sim 800 - 1200\ \mathrm{K}
 $$
 
 A useful measure of buoyancy is the **Rayleigh number**  
 $$
-Ra = \frac{g\beta \Delta T\, L^3}{\nu\alpha}.
+Ra = \frac{g\beta \Delta T\, L^3}{\nu\alpha}
 $$
 
 In FCCVD, \(Ra\) is typically large, which produces:
@@ -224,15 +224,15 @@ $$
 Axisymmetric CFD cannot represent these.  
 Planar CFD can show symmetry breaking but cannot show full 3D plume drift.
 
-These effects appear in both **vertical** and **horizontal** reactors.
+These effects appear in both vertical and horizontal reactors.
 
 Below is an example from a horizontal DI-FCCVD reactor.
 
 ![Buoyancy-driven mixed convection]({{ 'assets/COMSOL_post5_f4.png' | relative_url }})
 
-*Figure 4. Buoyancy-driven mixed convection in a **horizontal** FCCVD reactor (adapted from Junnarkar et al., Carbon 2025).*
+*Figure 4. Buoyancy-driven mixed convection in a horizontal FCCVD reactor (adapted from Junnarkar et al., Carbon 2025).*
 
-The large plume drift and asymmetric recirculation correspond to \(m\ge1\) modes and require 3D modeling.
+The large plume drift and asymmetric recirculation correspond to $(m\ge1\)$ modes and require 3D modeling.
 
 ---
 
@@ -440,6 +440,6 @@ These modes:
 
 | Model        | Removed Terms             | Allowed Modes        | Missing Physics                      |
 |--------------|---------------------------|-----------------------|--------------------------------------|
-| 3D       | none                      | all \(m\)            | none                                 |
-| Axisymmetric | \(\partial_\theta, u_\theta\) | \(m = 0\) only       | helical modes, lateral drift, buoyant azimuthal motion |
-| Planar   | \(\partial_z, w\)         | planar symmetry breaking | vortex stretching, full 3D cascade |
+| 3D       | none                      | all $(m\)$            | none                                 |
+| Axisymmetric | $(\partial_\theta, u_\theta\)$ | $(m = 0\)$ only       | helical modes, lateral drift, buoyant azimuthal motion |
+| Planar   | $(\partial_z, w\)$         | planar symmetry breaking | vortex stretching, full 3D cascade |
