@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Understanding How Dimensionality Shapes Jet Stability in CFD"
-date: 2025-10-07
+date: 2025-11-29
 image: "assets/Jet_dimensionality.png"
 image_alt: "Comparison of jet behavior across 2D and 3D simulations"
 summary: "A detailed and mathematically grounded discussion of how dimensionality filters instability modes and constrains the physics the Navier–Stokes equations are allowed to express."
