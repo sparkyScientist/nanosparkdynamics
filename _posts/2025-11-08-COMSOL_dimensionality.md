@@ -65,6 +65,7 @@ $$
 \mathbf{u} = (u_r, u_\theta, u_z),
 $$
 and continuity becomes
+
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
 + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta}
@@ -111,6 +112,7 @@ $$
 is removed for $(m\neq 0\)$.
 
 Continuity reduces to  
+
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r}
 + \frac{\partial u_z}{\partial z}
@@ -136,6 +138,7 @@ $$
 $$
 
 Continuity becomes  
+
 $$
 \frac{\partial u}{\partial x}
 + \frac{\partial v}{\partial y}
@@ -438,8 +441,8 @@ These modes:
 
 ## 6. Summary Table
 
-| Model        | Removed Terms             | Allowed Modes        | Missing Physics                      |
-|--------------|---------------------------|-----------------------|--------------------------------------|
-| 3D       | none                      | all $(m\)$            | none                                 |
-| Axisymmetric | $(\partial_\theta, u_\theta\)$ | $(m = 0\)$ only       | helical modes, lateral drift, buoyant azimuthal motion |
+| Model        | Removed Terms             | Allowed Modes                             | Missing Physics                                |
+|--------------|---------------------------|-------------------------------------------|------------------------------------------------|
+| 3D       | none                      | $all (m\)$            | none                                 |
+| Axisymmetric | $(\partial_\theta, u_\theta\)$ | $(m = 0\) only$       | helical modes, lateral drift, buoyant azimuthal motion |
 | Planar   | $(\partial_z, w\)$         | planar symmetry breaking | vortex stretching, full 3D cascade |
