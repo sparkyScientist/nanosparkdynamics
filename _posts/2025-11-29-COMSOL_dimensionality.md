@@ -28,16 +28,14 @@ This post outlines the mathematical and physical differences between **2D planar
 
 Fluid motion is governed by the incompressible Navier–Stokes equations. To understand what dimensionality removes, we must first look at the full equations.
 
-**Continuity (Conservation of Mass):**
-
+**Continuity (Conservation of Mass)**
 $$
 \nabla \cdot \mathbf{u} = 0
 $$
 
-**Momentum (Conservation of Momentum):**
-
+**Momentum (Conservation of Momentum)**
 $$
-\rho\left(\frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b
+\rho\left(\frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b \, .
 $$
 
 Here, $\mathbf{u}$ is the velocity vector, $p$ is pressure, $\rho$ is density, $\mu$ is dynamic viscosity, and $\mathbf{f}_b$ represents body forces (such as gravity/buoyancy).
@@ -53,25 +51,20 @@ When we apply dimensional assumptions—such as setting $\partial/\partial z = 0
 *Figure 1. Dimensionality filtering applied to the Navier–Stokes equations.*
 
 In the full 3D formalism using cylindrical coordinates $(r, \theta, z)$, the velocity field is $\mathbf{u} = (u_r, u_\theta, u_z)$. The continuity equation includes gradients in all three directions:
-
 $$
-\frac{1}{r}\frac{\partial (r u_r)}{\partial r} + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta} + \frac{\partial u_z}{\partial z} = 0
+\frac{1}{r}\frac{\partial (r u_r)}{\partial r} + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta} + \frac{\partial u_z}{\partial z} = 0 \, .
 $$
 
 The critical feature of 3D flows is the presence of the **vortex stretching term** in the vorticity transport equation:
-
 $$
 (\boldsymbol{\omega}\cdot\nabla)\mathbf{u}
 $$
-
 where $\boldsymbol{\omega} = \nabla \times \mathbf{u}$ is the vorticity. This term is responsible for stretching and tilting vortex tubes, transferring energy from large scales to small scales. It is the engine of the classical turbulence cascade.
 
 Furthermore, the 3D stability spectrum contains **all** azimuthal modes:
-
 $$
 m = 0,\,1,\,2,\,\dots
 $$
-
 This allows for:
 - **Helical instabilities** ($m=1$ mode).
 - **Jet flapping** and meandering.
@@ -88,15 +81,13 @@ Consequently, only 3D simulations can capture the "sinuous" or helical instabili
 *Figure 2. Axisymmetric modeling retains only $m=0$ modes.*
 
 Axisymmetry is a powerful simplification for pipes and round jets, but it comes with a strict constraint:
-
 $$
-\frac{\partial}{\partial\theta}=0, \qquad u_\theta = 0.
+\frac{\partial}{\partial\theta}=0, \qquad u_\theta = 0 \, .
 $$
 
 Mathematically, this restricts solutions to the $m=0$ azimuthal mode. Any perturbation of the form $\tilde{u}(r,z)e^{im\theta}$ is admissible only if $m=0$. The continuity equation reduces to:
-
 $$
-\frac{1}{r}\frac{\partial (r u_r)}{\partial r} + \frac{\partial u_z}{\partial z} = 0
+\frac{1}{r}\frac{\partial (r u_r)}{\partial r} + \frac{\partial u_z}{\partial z} = 0 \, .
 $$
 
 **Expert Note:** The operator $L_{\text{axi}}$ is essentially the $m=0$ subspace of the full operator.
@@ -112,30 +103,25 @@ Axisymmetric models are excellent for predicting time-averaged mean flows, but t
 
 ## Planar 2D: Limited Physics, But Free Symmetry Breaking
 
-Planar simulations assume the flow is invariant in the third dimension (effectively an infinite slot or sheet). The constraints are:
-
+Planar simulations assume the flow is invariant in the third dimension (effectively an infinite slot or sheet). The constraints are
 $$
-\frac{\partial}{\partial z}=0,\qquad w=0.
+\frac{\partial}{\partial z}=0,\qquad w=0 \, .
 $$
 
-Continuity becomes:
-
+Continuity becomes
 $$
-\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0 \, .
 $$
 
 In planar 2D, vorticity becomes a scalar, $\omega = \partial v/\partial x - \partial u/\partial y$. The transport equation simplifies significantly:
-
 $$
-\frac{D\omega}{Dt} = \nu\nabla^2\omega.
+\frac{D\omega}{Dt} = \nu\nabla^2\omega \, .
 $$
 
 Crucially, the vortex stretching term vanishes:
-
 $$
-(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} = 0.
+(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} = 0 \, .
 $$
-
 This means planar flows cannot generate the 3D energy cascade found in real turbulence.
 
 However, unlike axisymmetric models, planar models **can** break symmetry within the plane. A centered jet in a planar domain is allowed to deflect left or right, a phenomenon critical for studying attachment instabilities.
@@ -148,12 +134,10 @@ However, unlike axisymmetric models, planar models **can** break symmetry within
 
 *Figure 3. Supercritical pitchfork bifurcation for jet deflection.*
 
-The lateral deflection of a jet (often associated with the Coandă effect) is a classic nonlinear dynamics problem. Near the critical Reynolds number ($Re_{\mathrm{crit}}$), the jet's lateral displacement $u(t)$ can be described by the normal form of a **supercritical pitchfork bifurcation**:
-
+The lateral deflection of a jet (often associated with the Coandă effect) is a classic nonlinear dynamics problem. Near the critical Reynolds number ($Re_{\mathrm{crit}}$), the jet's lateral displacement $u(t)$ can be described by the normal form of a **supercritical pitchfork bifurcation**
 $$
-\frac{du}{dt} = r u - u^3,
+\frac{du}{dt} = r u - u^3 \, ,
 $$
-
 where $r$ is the control parameter proportional to $Re - Re_{\mathrm{crit}}$.
 
 The steady states ($du/dt = 0$) are:
@@ -171,21 +155,17 @@ This deflection is a physical result of the equations, not a numerical artifact.
 ## Application: FCCVD and Buoyancy
 
 These dimensional constraints are particularly relevant for Floating Catalyst Chemical Vapor Deposition (FCCVD) reactors, which operate under extreme thermal gradients:
-
 $$
-\Delta T \sim 800 - 1200\ \mathrm{K}
-$$
-
-The driving force for convection is characterized by the **Rayleigh number**:
-
-$$
-Ra = \frac{g\beta \Delta T\, L^3}{\nu\alpha}
+\Delta T \sim 800 - 1200\ \mathrm{K} \, .
 $$
 
+The driving force for convection is characterized by the **Rayleigh number**
+$$
+Ra = \frac{g\beta \Delta T\, L^3}{\nu\alpha} \, ,
+$$
 where $\beta$ is the thermal expansion coefficient and $\alpha$ is thermal diffusivity. In FCCVD, $Ra$ is typically large ($Ra \gg 10^4$), leading to complex mixed convection.
 
-Buoyancy naturally introduces azimuthal perturbations of the form:
-
+Buoyancy naturally introduces azimuthal perturbations of the form
 $$
 \tilde{u}(r,z)e^{im\theta},\qquad m=1,2,\dots
 $$
