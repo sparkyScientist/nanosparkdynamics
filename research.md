@@ -47,24 +47,52 @@ permalink: /research/
       </a>
     </div>
 
-    <h3 class="text-2xl font-bold mb-4 border-b pb-2">Selected Publications</h3>
+    <h3 class="text-2xl font-bold mb-4 border-b pb-2">Publications</h3>
 
     <div class="space-y-5">
+      <!-- Publication 1 -->
       <div>
         <p class="text-lg">
-          Junnarkar, J. S., <em>et al.</em> <strong>Understanding the effect of transport phenomena in deep-injection floating catalyst chemical vapor deposition carbon nanotube synthesis.</strong>
-          <em>Carbon</em>, 238 (2025) 120259.
+          Junnarkar, J. S., Li, M., Sloan, A. W. N., Khabushev, E., Benavides-Figueroa, A. V., Gong, M. L., Garza, M., Khoury, J. F., Cavuto, D., Williams, S. M., Micale, D., Bracconi, M., Maestri, M., Irvin Jr., G. C., & Pasquali, M. <strong>Understanding the effect of transport phenomena in deep-injection floating catalyst chemical vapor deposition carbon nanotube synthesis.</strong>
+          <em>Carbon</em>, 238, 120259 (2025).
         </p>
         <a href="https://doi.org/10.1016/j.carbon.2025.120259" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Read Paper →</a>
       </div>
 
+      <!-- Publication 2 -->
+      <div>
+        <p class="text-lg">
+          Junnarkar, J. S., Faruquee, T. A., Wang, J., Khabushev, E., Hogan, C. J., Pasquali, M., & Simeni, M. S. <strong>Optical diagnostics investigating iron nanoparticle formation using an inductively coupled plasma.</strong>
+          <em>AIAA SciTech 2025 Forum</em> (2025).
+        </p>
+        <a href="https://doi.org/10.2514/6.2025-1177" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Read Paper →</a>
+      </div>
+
+      <!-- Publication 3 -->
+      <div>
+        <p class="text-lg">
+          Gong, M. L., Khabushev, E., Benavides-Figueroa, A. V., Sloan, A. W. N., Junnarkar, J. S., Khoury, J. F., Li, M., Irvin Jr., G. C., & Pasquali, M. <strong>Applying acoustic sensing technology to measure and control input precursor vapors in FCCVD systems.</strong>
+          <em>Chemical Engineering Journal</em>, 524, 169461 (2025).
+        </p>
+        <a href="https://doi.org/10.1016/j.cej.2025.169461" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Read Paper →</a>
+      </div>
+
+      <!-- Publication 4 -->
       <div>
         <p class="text-lg">
           Tiwari, U., Ganesan, N. G., Junnarkar, J. S., & Rangarajan, V. <strong>Toward the formulation of bio-cosmetic nanoemulsions: from plant-derived to microbial-derived ingredients.</strong>
-          <em>Journal of Dispersion Science and Technology</em>, 43(7), 1061–1078 (2020).
+          <em>Journal of Dispersion Science and Technology</em>, 43(7), 1061-1078 (2020).
         </p>
         <a href="https://doi.org/10.1080/01932691.2020.1847664" class="text-blue-600 hover:underline" target="_blank" rel="noopener">Read Paper →</a>
       </div>
     </div>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4 border-b pb-2">Manuscripts in Preparation</h3>
+
+    <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+      <li><strong>Comparison of Vertical and Horizontal FCCVD Reactors for High-Quality CNT Synthesis.</strong></li>
+      <li><strong>Deep Jet Injection of Plasma-Generated Catalyst Aerosols for High-Yield CNT Synthesis.</strong></li>
+      <li><strong>Hydrodynamic Stability in Confined Reactor Flows: Implications for Carbon Nanotube Synthesis.</strong></li>
+    </ul>
   </div>
 </section>
