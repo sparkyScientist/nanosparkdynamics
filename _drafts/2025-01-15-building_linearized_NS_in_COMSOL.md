@@ -102,8 +102,8 @@ This flexibility is what enables a fully custom LNS implementation.
 
 We introduce the perturbation fields:
 
-- `up`, `vp`, `wp` — velocity perturbations in $x$, $y$, $z$
-- `pp` — pressure perturbation
+- `up`, `vp`, `wp` - velocity perturbations in $x$, $y$, $z$
+- `pp` - pressure perturbation
 
 Although these variables have different physical units, the General Form PDE treats them as mathematical fields, which is sufficient for constructing the stability operator.
 
@@ -281,7 +281,7 @@ Despite these limitations, constructing the stability operator directly in COMSO
 
 # 10. Reflections
 
-Building the linearized Navier–Stokes operator manually in COMSOL requires attention to detail. It helped me understand how different physical mechanisms—diffusion, convection, shear, and incompressibility—enter the linearized system. The process also highlighted how commercial CFD software can be adapted to explore research questions that go beyond steady-state solutions.
+Building the linearized Navier–Stokes operator manually in COMSOL requires attention to detail. It helped me understand how different physical mechanisms - diffusion, convection, shear, and incompressibility - enter the linearized system. The process also highlighted how commercial CFD software can be adapted to explore research questions that go beyond steady-state solutions.
 
 This approach may be useful for others studying hydrodynamic stability in reactors or other engineering systems where flow transitions matter and where traditional CFD tools offer limited access to the underlying linearized operator.
 

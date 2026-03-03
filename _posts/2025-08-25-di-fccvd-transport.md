@@ -19,7 +19,7 @@ But most CNTs today are grown by **floating catalyst chemical vapor deposition (
 - Carbon conversion to CNTs is usually less than 1%.  
 - Reactor flow patterns are messy, with recirculation zones that trap catalysts in the wrong places.  
 
-✅ The missing piece: we don’t fully understand how **transport phenomena**, flow, mixing, buoyancy, heat transfer — control CNT growth.
+✅ The missing piece: we don’t fully understand how **transport phenomena**, flow, mixing, buoyancy, heat transfer - control CNT growth.
 
 ---
 
@@ -143,8 +143,8 @@ To illustrate the coupling between transport and conversion more clearly, we als
 
 This work shows:
 
-1. **Transport is not passive** — it *defines* the CNT growth zone.  
-2. **Chemistry and transport must align** — controlling one without the other fails.  
+1. **Transport is not passive** - it *defines* the CNT growth zone.  
+2. **Chemistry and transport must align** - controlling one without the other fails.  
 3. **CFD + experiments give a predictive framework** for reactor design.  
 
 ![Suggested mechanism]({{'assets/Schematic_showing_DIFCCVD.png'| relative_url }})  

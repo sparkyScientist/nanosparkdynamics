@@ -11,7 +11,7 @@ summary: "A deep dive into how the counter-rotating vortex pair (CVP) and moment
 
 When you look at a T-junction, the most immediate design question is often: **"How do we know from which end of the T-junction we should flow which gas?"** 
 
-If you have a fast, light gas and a slow, heavy gas, which one belongs in the main pipe, and which one goes in the branch side? The humble T-junction is everywhere—in chemical plants, natural gas pipelines, and even microfluidic devices. But figuring out the best way to mix two streams isn't just about plumbing; it's a classic jet-in-crossflow (JICF) physics problem.
+If you have a fast, light gas and a slow, heavy gas, which one belongs in the main pipe, and which one goes in the branch side? The humble T-junction is everywhere - in chemical plants, natural gas pipelines, and even microfluidic devices. But figuring out the best way to mix two streams isn't just about plumbing; it's a classic jet-in-crossflow (JICF) physics problem.
 
 When a branch jet enters a main crossflow, the resulting interaction spawns a series of vortical structures and turbulent mixing processes that dictate mixing efficiency.  
 
@@ -38,7 +38,7 @@ This framing makes the physics of a T-junction a momentum tug-of-war between cro
 Experiments using PIV and PLIF ([Pan et al., 2001](https://www.eng.buffalo.edu/Research/LFD/publications/2001/2001-1.pdf)) and LES simulations ([Salewski et al., 2008](https://backend.orbit.dtu.dk/ws/files/5739828/Mixing.pdf)) reveal that a handful of coherent structures dominate mixing:
 
 - **Counter-Rotating Vortex Pair (CVP):** the kidney-shaped signature of JICF. The CVP folds the scalar interface, entrains crossflow into the jet, and drives macro-mixing.  
-- **Shear-Layer Vortices:** Kelvin–Helmholtz instabilities at the jet edge — critical for near-field entrainment.  
+- **Shear-Layer Vortices:** Kelvin–Helmholtz instabilities at the jet edge - critical for near-field entrainment.  
 - **Horseshoe and Wake Vortices:** wrap around the jet base and trail downstream, adding unsteadiness and small-scale stirring ([Zhang & Yang, 2017](https://www.yang.gatech.edu/publications/Journal/JGTP%20(2017,%20Zhang,%20JICF%201).pdf)).  
 
 ![Key structures]({{'assets/Key_structures_T_junction.png'| relative_url }})  
@@ -67,15 +67,15 @@ so that increasing J indicates a stronger crossflow (and weaker jet).
 
 Figure 2 below, adapted from Kok & van der Wal (1996), shows the three canonical regimes as observed experimentally:
 
-Wall-Jet Regime (high J, low $$M_R$$) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
+Wall-Jet Regime (high J, low $M_R$) – the crossflow dominates, bending the jet and causing it to attach to the wall downstream.
 
-Deflected-Jet Regime (moderate J, moderate $$M_R$$) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
+Deflected-Jet Regime (moderate J, moderate $M_R$) – the jet partially penetrates, forming a counter-rotating vortex pair (CVP) that drives efficient mixing.
 
-Impinging-Jet Regime (low J, high $$M_R$$) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
+Impinging-Jet Regime (low J, high $M_R$) – the jet momentum dominates, crossing the pipe and impinging on the opposite wall, producing intense but localized mixing.
 
 ![Flow momentum]({{'assets/Flow_vs_Momentum_fig2.png'| relative_url }})  
 *Figure 2. Flow regimes in T-junctions from Kok \& van der Wal (1996). 
-    The authors define $$(M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2})$$ ; here $$(J = \frac{1}{M_R})$$, so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
+    The authors define $(M_R = \frac{\rho_\text{jet} U_\text{jet}^2}{\rho_\text{main} U_\text{main}^2})$ ; here $(J = \frac{1}{M_R})$, so the horizontal ordering (wall - deflected - impinging) corresponds to increasing jet strength and decreasing \( J \).*
 
 
 
@@ -107,21 +107,21 @@ $$
 \text{COV} = \frac{\sigma_C}{\overline{C}} = \frac{\sqrt{\langle (C - \overline{C})^2 \rangle}}{\overline{C}}
 $$
 
-Here, $$C$$ is the local concentration, $$\overline{C}$$ is the mean value across the cross-section, and $$\sigma_C$$ is the standard deviation.  
+Here, $C$ is the local concentration, $\overline{C}$ is the mean value across the cross-section, and $\sigma_C$ is the standard deviation.  
 A perfectly mixed flow has COV = 0, while a mixture is considered ``uniform'' when **COV ≤ 0.05** ([Sun et al., 2020](https://www.mdpi.com/2076-3417/10/11/3899)).
 
-In a T-junction, $$COV$$ decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
-The rate at which this happens depends strongly on the momentum ratio $$J$$:
+In a T-junction, $COV$ decreases gradually along the main channel as the jet entrains and diffuses into the crossflow.  
+The rate at which this happens depends strongly on the momentum ratio $J$:
 
 
-**High $$J$$** – the crossflow dominates, and the jet hugs the wall. Mixing is slow and requires a long downstream length.
-**Moderate $$J$$** – the jet and crossflow have comparable momentum. The CVP folds the interface efficiently, leading to faster homogenization.
-**Low $$J$$** – the jet dominates and penetrates fully across the pipe, resulting in rapid but locally intense mixing.
+**High $J$** – the crossflow dominates, and the jet hugs the wall. Mixing is slow and requires a long downstream length.
+**Moderate $J$** – the jet and crossflow have comparable momentum. The CVP folds the interface efficiently, leading to faster homogenization.
+**Low $J$** – the jet dominates and penetrates fully across the pipe, resulting in rapid but locally intense mixing.
 
 
 Hydrogen blending studies show a similar dependence on momentum ratio ([Tian et al.](https://www.mdpi.com/1996-1944/18/8/1879)).  
-At 10% H₂, the required mixing length is roughly $$100D$$, while at 25% H₂ it drops to about $$21D$$.  
-This same trend appears in my COMSOL simulations — stronger jets (lower $$J$$) mix quickly, whereas crossflow-dominated configurations (higher $$J$$) require a much longer channel to achieve uniformity.
+At 10% H₂, the required mixing length is roughly $100D$, while at 25% H₂ it drops to about $21D$.  
+This same trend appears in my COMSOL simulations - stronger jets (lower $J$) mix quickly, whereas crossflow-dominated configurations (higher $J$) require a much longer channel to achieve uniformity.
 
 
 ---
