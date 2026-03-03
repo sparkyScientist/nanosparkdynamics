@@ -22,11 +22,9 @@ Manually outlining hundreds of particles is not only slow, it also introduces in
 
 ### Step 1: Teaching the AI with Professional Tools
 
-An AI model is only as good as the data it learns from. To build a solid foundation, I turned to **Roboflow**, a platform for managing computer vision datasets. I uploaded 80 TEM images covering the range of our samples, from 5 nm to 50 nm scale bars, and drew polygon masks around several thousand particles. Roboflow’s annotation and versioning tools streamlined the process, and just as importantly, made sure the dataset was clean and reproducible.
+An AI model is only as good as the data it learns from. To build a solid foundation, I turned to **Roboflow**, a platform for managing computer vision datasets. I uploaded 80 TEM images covering the range of our samples, from 5 nm to 50 nm scale bars, and drew polygon masks around several thousand particles. Roboflow’s annotation and versioning tools streamlined the process, and just as importantly, made sure the dataset was clean, reproducible, and easy to audit.
 
-
-
-<img src="https://i.postimg.cc/L43Vph1x/Annotated-data.png" alt="Side-by-side comparison of a raw TEM image and the same image with manual annotations" class="rounded-lg border">
+<img src="https://i.postimg.cc/L43Vph1x/Annotated-data.png" alt="Side-by-side comparison of a raw TEM image and the same image with manual annotations" class="rounded-lg border shadow-sm">
 <p class="image-caption">Left: a raw TEM image. Right: the same image annotated in Roboflow, with each particle outlined by hand.</p>
 
 ### Step 2: Training a "Specialist" Model in the Cloud
