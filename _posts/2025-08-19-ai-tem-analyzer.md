@@ -14,7 +14,7 @@ A walk through how I built a custom computer vision tool, starting with manual d
 
 ## The High Cost of a Simple Question
 
-IIn materials science, a deceptively simple question shapes the outcome of an experiment: “What is the size distribution of my nanoparticles?” Transmission Electron Microscopy (TEM) images hold that answer, but turning those images into meaningful numbers has long been a frustrating bottleneck.
+In materials science, a deceptively simple question shapes the outcome of an experiment: “What is the size distribution of my nanoparticles?” Transmission Electron Microscopy (TEM) images hold that answer, but turning those images into meaningful numbers has long been a frustrating bottleneck.
 
 Manually outlining hundreds of particles is not only slow, it also introduces inconsistency. Results vary depending on who’s doing the tracing, making the data less reliable. I built this tool to get around that barrier: replacing a time-consuming, error-prone process with one that is objective, automated, and dramatically faster.
 
