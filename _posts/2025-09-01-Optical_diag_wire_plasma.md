@@ -55,11 +55,11 @@ Broadband emission spectra revealed the active species inside:
 - **Fe I / Fe II lines** from evaporated and ionized iron.  
 - **OH radical** from trace water impurities.  
 - **Ar carrier gas lines**.  
-- **N₂ bands** spanning 280–500 nm.
+- **N₂ bands** spanning 280 - 500 nm.
 Together, these spectral features map the chemistry of this specific RF plasma.
 
 ![Spectrum]({{'assets/Optical_diag/Full spectrum.png' | relative_url }})  
-*Figure 3. Broadband emission spectrum (190–900 nm). Iron, argon, OH, and N₂ features are clearly identified.*
+*Figure 3. Broadband emission spectrum (190 - 900 nm). Iron, argon, OH, and N₂ features are clearly identified.*
 
 These fingerprints confirm the plasma actively vaporizes Fe and sustains a reactive environment for nanoparticle nucleation.
 
@@ -69,7 +69,7 @@ These fingerprints confirm the plasma actively vaporizes Fe and sustains a react
 
 Fe nanoparticles exiting the plasma were sized in real time:
 
-- **Stable size range:** Most conditions produced 3–7 nm particles, though a few runs showed slightly broader tails.  
+- **Stable size range:** Most conditions produced 3 - 7 nm particles, though a few runs showed slightly broader tails.  
 - **Monodisperse distributions:** log-normal PSDs at low power (80 W).  
 - **Concentration trend:** NP counts dropped from ~\(10^8\) cm⁻³ at 1.5 lpm to ~\(10^7\) cm⁻³ at 2.0 lpm, due to shorter residence time.
 
@@ -83,7 +83,7 @@ Fe nanoparticles exiting the plasma were sized in real time:
 This study shows that:
 
 1. **Plasma gas temperature can be mapped directly from light.**  
-2. **Fe nanoparticles form with the right sizes (3–7 nm) for CNT growth.**  
+2. **Fe nanoparticles form with the right sizes (3 - 7 nm) for CNT growth.**  
 3. **Concentrations remain low**, making ICP a diagnostic tool, not a production reactor.  
 
 In other words: ICP plasmas are a controlled environment to study nanoparticle formation, before scaling insights into FCCVD reactors.

@@ -1,17 +1,17 @@
 ---
-title: "Building a Linearized Navier–Stokes Stability Solver in COMSOL Using the General PDE Interface"
+title: "Building a Linearized Navier - Stokes Stability Solver in COMSOL Using the General PDE Interface"
 date: 2025-01-15
 tags: [CFD, COMSOL, Stability, Linearized Navier-Stokes, CNT-reactor]
 ---
 
-# Building a Linearized Navier–Stokes Stability Solver in COMSOL Using the General PDE Interface
+# Building a Linearized Navier - Stokes Stability Solver in COMSOL Using the General PDE Interface
 
 Understanding when a steady flow becomes unsteady is important for many fluid systems.  
 In floating-catalyst CNT reactors, for example, oscillations in the velocity and temperature fields can influence mixing, catalyst exposure, and ultimately CNT growth. Traditional CFD workflows give the steady solution, but they rarely provide direct information about whether that solution is *stable*.  
 
 Linear stability analysis addresses this question by examining how small perturbations behave around the steady flow. If a perturbation decays, the base flow is stable. If it grows, it indicates the onset of oscillations or symmetry breaking.  
 
-Most commercial CFD software does not expose the linearized Navier–Stokes operator needed for this analysis. In this post, I describe how I constructed a Linearized Navier–Stokes (LNS) stability solver *entirely inside COMSOL* using the **General Form PDE** interface. This approach relies on defining velocity and pressure perturbations explicitly, assembling the linearized operator by hand, and using COMSOL’s eigenvalue solver to compute growth rates and mode shapes.
+Most commercial CFD software does not expose the linearized Navier - Stokes operator needed for this analysis. In this post, I describe how I constructed a Linearized Navier - Stokes (LNS) stability solver *entirely inside COMSOL* using the **General Form PDE** interface. This approach relies on defining velocity and pressure perturbations explicitly, assembling the linearized operator by hand, and using COMSOL’s eigenvalue solver to compute growth rates and mode shapes.
 
 The goal is to explain the method clearly enough that a non-specialist can follow the reasoning, while retaining enough mathematical detail for readers familiar with stability theory.
 
@@ -29,11 +29,11 @@ Given a steady flow field $ \mathbf{U}(\mathbf{x}) $, linear stability asks:
 - *If it grows, what is its spatial structure?*
 - *At what Reynolds number does the behavior change?*
 
-To answer this, we linearize the Navier–Stokes equations around the steady solution. The resulting system is an eigenvalue problem, whose solutions indicate whether the flow is stable or unstable.
+To answer this, we linearize the Navier - Stokes equations around the steady solution. The resulting system is an eigenvalue problem, whose solutions indicate whether the flow is stable or unstable.
 
 ---
 
-# 2. Linearizing the Navier–Stokes Equations
+# 2. Linearizing the Navier - Stokes Equations
 
 Let the full velocity be:
 
@@ -48,7 +48,7 @@ $$
 p(\mathbf{x}, t) = P(\mathbf{x}) + p'(\mathbf{x}, t).
 $$
 
-Substituting into the incompressible Navier–Stokes equations and neglecting nonlinear terms in $\mathbf{u}'$ yields the **linearized system**:
+Substituting into the incompressible Navier - Stokes equations and neglecting nonlinear terms in $\mathbf{u}'$ yields the **linearized system**:
 
 $$
 \rho \frac{\partial \mathbf{u}'}{\partial t}
@@ -89,7 +89,7 @@ The General Form PDE interface, on the other hand, gives complete control over:
 
 - The mass matrix
 - Diffusion fluxes
-- Pressure–velocity coupling
+- Pressure - velocity coupling
 - First-derivative terms (advection and shear)
 - Continuity constraints
 - Boundary conditions
@@ -116,7 +116,7 @@ In COMSOL:
 
 ---
 
-# 5. Encoding the Linearized Navier–Stokes Operator
+# 5. Encoding the Linearized Navier - Stokes Operator
 
 The General Form PDE uses the structure:
 
@@ -131,13 +131,13 @@ Each term maps to a physical part of the LNS equations.
 
 We want:
 
-- Velocities to contribute to the eigenvalue mass matrix ($d_a = \rho$)
-- Pressure to act as a constraint ($d_a = 0$)
+- Velocities to contribute to the eigenvalue mass matrix ($d\_a = \rho$)
+- Pressure to act as a constraint ($d\_a = 0$)
 
 In COMSOL:
 
-- Set $d_a = \rho$ on the first three diagonal terms
-- Set $d_a = 0$ on the pressure equation
+- Set $d\_a = \rho$ on the first three diagonal terms
+- Set $d\_a = 0$ on the pressure equation
 
 This defines the generalized eigenvalue structure.
 
@@ -188,7 +188,7 @@ U_x \frac{\partial u_p}{\partial x}
 + U_z \frac{\partial u_p}{\partial z},
 $$
 
-and similarly for $v_p$ and $w_p$.
+and similarly for $v\_p$ and $w\_p$.
 
 Because COMSOL’s flux form does not allow first derivatives of one variable to appear directly in another variable’s flux, these convective terms are included in the source term:
 
@@ -196,7 +196,7 @@ $$
 f_1 = -\rho \big( U_x u_{px} + U_y u_{py} + U_z u_{pz} \big),
 $$
 
-and analogous expressions for $f_2$ and $f_3$.
+and analogous expressions for $f\_2$ and $f\_3$.
 
 ---
 
@@ -212,7 +212,7 @@ u_p \frac{\partial U_x}{\partial x}
 + w_p \frac{\partial U_x}{\partial z},
 $$
 
-and similarly for $U_y$ and $U_z$.
+and similarly for $U\_y$ and $U\_z$.
 
 These enter the source term as well.  
 Including them is important because shear often drives instabilities in buoyancy-affected reactor flows.
@@ -224,9 +224,9 @@ Including them is important because shear often drives instabilities in buoyancy
 To study natural modes of the system, we impose **homogeneous** (zero-value) perturbations:
 
 - **Walls:**  
-  $u_p = v_p = w_p = 0$  
+  $u\_p = v\_p = w\_p = 0$  
 - **Inlet:**  
-  No incoming perturbation: $u_p = v_p = w_p = 0$  
+  No incoming perturbation: $u\_p = v\_p = w\_p = 0$  
 - **Outlet:**  
   Natural condition for velocities; pressure perturbation may be fixed to zero for reference.
 
@@ -281,7 +281,7 @@ Despite these limitations, constructing the stability operator directly in COMSO
 
 # 10. Reflections
 
-Building the linearized Navier–Stokes operator manually in COMSOL requires attention to detail. It helped me understand how different physical mechanisms - diffusion, convection, shear, and incompressibility - enter the linearized system. The process also highlighted how commercial CFD software can be adapted to explore research questions that go beyond steady-state solutions.
+Building the linearized Navier - Stokes operator manually in COMSOL requires attention to detail. It helped me understand how different physical mechanisms - diffusion, convection, shear, and incompressibility - enter the linearized system. The process also highlighted how commercial CFD software can be adapted to explore research questions that go beyond steady-state solutions.
 
 This approach may be useful for others studying hydrodynamic stability in reactors or other engineering systems where flow transitions matter and where traditional CFD tools offer limited access to the underlying linearized operator.
 

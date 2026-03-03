@@ -4,7 +4,7 @@ title: "Understanding How Dimensionality Shapes Jet Stability in CFD"
 date: 2025-11-29
 image: "assets/Jet_dimensionality.png"
 image_alt: "Comparison of jet behavior across 2D and 3D simulations"
-summary: "A detailed and mathematically grounded discussion of how dimensionality filters instability modes and constrains the physics the Navier–Stokes equations are allowed to express."
+summary: "A detailed and mathematically grounded discussion of how dimensionality filters instability modes and constrains the physics the Navier - Stokes equations are allowed to express."
 ---
 
 ## Introduction
@@ -17,7 +17,7 @@ This post outlines the mathematical and physical differences between **2D planar
 
 ### Key Takeaways
 
-*   **Dimensionality is a filter:** Reducing dimensions removes terms from the Navier–Stokes equations, effectively "turning off" specific physical mechanisms.
+*   **Dimensionality is a filter:** Reducing dimensions removes terms from the Navier - Stokes equations, effectively "turning off" specific physical mechanisms.
 *   **Axisymmetric 2D ($m=0$):** Excellent for mean flows but artificially suppresses helical instabilities and azimuthal drift.
 *   **Planar 2D:** Allows for symmetry breaking (e.g., jet deflection) but lacks the vortex stretching mechanism required for turbulence cascades.
 *   **3D:** The only domain that captures the full spectrum of azimuthal modes ($m \ge 1$) required for plume drift and helical flapping.
@@ -26,7 +26,7 @@ This post outlines the mathematical and physical differences between **2D planar
 
 ## Governing Equations and the Dimensional Filter
 
-Fluid motion is governed by the incompressible Navier–Stokes equations. To understand what dimensionality removes, we must first look at the full equations.
+Fluid motion is governed by the incompressible Navier - Stokes equations. To understand what dimensionality removes, we must first look at the full equations.
 
 **Continuity (Conservation of Mass)**
 
@@ -40,9 +40,9 @@ $$
 \rho\left(\frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2 \mathbf{u} + \mathbf{f}_b \, .
 $$
 
-Here, $\mathbf{u}$ is the velocity vector, $p$ is pressure, $\rho$ is density, $\mu$ is dynamic viscosity, and $\mathbf{f}_b$ represents body forces (such as gravity/buoyancy).
+Here, $\mathbf{u}$ is the velocity vector, $p$ is pressure, $\rho$ is density, $\mu$ is dynamic viscosity, and $\mathbf{f}\_b$ represents body forces (such as gravity/buoyancy).
 
-When we apply dimensional assumptions - such as setting $\partial/\partial z = 0$ (planar) or $\partial/\partial \theta = 0$ (axisymmetric) - we modify the differential operators. I visualize this as a **filter** applied to the Navier–Stokes operator: it passes certain physical behaviors while blocking others.
+When we apply dimensional assumptions - such as setting $\partial/\partial z = 0$ (planar) or $\partial/\partial \theta = 0$ (axisymmetric) - we modify the differential operators. I visualize this as a **filter** applied to the Navier - Stokes operator: it passes certain physical behaviors while blocking others.
 
 ---
 
@@ -50,9 +50,9 @@ When we apply dimensional assumptions - such as setting $\partial/\partial z = 0
 
 ![Dimensionality filtering diagram]({{ 'assets/COMSOL_post5_f1.png' | relative_url }})
 
-*Figure 1. Dimensionality filtering applied to the Navier–Stokes equations.*
+*Figure 1. Dimensionality filtering applied to the Navier - Stokes equations.*
 
-In the full 3D formalism using cylindrical coordinates $(r, \theta, z)$, the velocity field is $\mathbf{u} = (u_r, u_\theta, u_z)$. The continuity equation includes gradients in all three directions:
+In the full 3D formalism using cylindrical coordinates $(r, \theta, z)$, the velocity field is $\mathbf{u} = (u\_r, u\_\theta, u\_z)$. The continuity equation includes gradients in all three directions:
 
 $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r} + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta} + \frac{\partial u_z}{\partial z} = 0 \, .
@@ -99,7 +99,7 @@ $$
 \frac{1}{r}\frac{\partial (r u_r)}{\partial r} + \frac{\partial u_z}{\partial z} = 0 \, .
 $$
 
-**Expert Note:** The operator $L_{\text{axi}}$ is essentially the $m=0$ subspace of the full operator.
+**Expert Note:** The operator $L\_{\text{axi}}$ is essentially the $m=0$ subspace of the full operator.
 
 Because of this, axisymmetric CFD **cannot** represent:
 - Helical motion ($m=1$).
@@ -148,23 +148,23 @@ However, unlike axisymmetric models, planar models **can** break symmetry within
 
 *Figure 3. Supercritical pitchfork bifurcation for jet deflection.*
 
-The lateral deflection of a jet (often associated with the Coandă effect) is a classic nonlinear dynamics problem. Near the critical Reynolds number ($Re_{\mathrm{crit}}$), the jet's lateral displacement $u(t)$ can be described by the normal form of a **supercritical pitchfork bifurcation**:
+The lateral deflection of a jet (often associated with the Coandă effect) is a classic nonlinear dynamics problem. Near the critical Reynolds number ($Re\_{\mathrm{crit}}$), the jet's lateral displacement $u(t)$ can be described by the normal form of a **supercritical pitchfork bifurcation**:
 
 $$
 \frac{du}{dt} = r u - u^3 \, ,
 $$
 
-where $r$ is the control parameter proportional to $Re - Re_{\mathrm{crit}}$.
+where $r$ is the control parameter proportional to $Re - Re\_{\mathrm{crit}}$.
 
 The steady states ($du/dt = 0$) are:
-1.  $u^* = 0$ (The centered jet)
-2.  $u^* = \pm\sqrt{r}$ (The asymmetric, deflected jets)
+1.  $u^\* = 0$ (The centered jet)
+2.  $u^\* = \pm\sqrt{r}$ (The asymmetric, deflected jets)
 
 Stability is determined by the Jacobian $\lambda = r - 3u^2$:
 - For $r < 0$ (low Re), the centered solution ($u=0$) is stable.
 - For $r > 0$ (high Re), the centered solution becomes unstable, and the flow settles into one of the two asymmetric states ($u = \pm\sqrt{r}$).
 
-This deflection is a physical result of the equations, not a numerical artifact. While numerical noise may trigger the transition, the stable states are mathematically inherent to the planar Navier–Stokes operator.
+This deflection is a physical result of the equations, not a numerical artifact. While numerical noise may trigger the transition, the stable states are mathematically inherent to the planar Navier - Stokes operator.
 
 ---
 
@@ -210,8 +210,8 @@ Dimensionality is not just a computational setting; it is a physical assumption.
 
 | Model | Removed Terms | Missing Physics |
 | :--- | :--- | :--- |
-| **Axisymmetric** | $\partial_\theta, u_\theta$ | Helical modes ($m=1$), lateral drift. |
-| **Planar** | $\partial_z, w$ | Vortex stretching, 3D turbulent cascade. |
+| **Axisymmetric** | $\partial\_\theta, u\_\theta$ | Helical modes ($m=1$), lateral drift. |
+| **Planar** | $\partial\_z, w$ | Vortex stretching, 3D turbulent cascade. |
 | **3D** | None | None. |
 
 2D models remain extremely useful for parameter sweeps and stability analysis, provided their limitations are understood. However, when the physics involves symmetry breaking, helical flapping, or strong buoyant plumes, we must accept the cost of 3D simulation to capture the correct instability spectrum.

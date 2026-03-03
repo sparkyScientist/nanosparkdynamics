@@ -4,7 +4,7 @@ title: "Cracking the Code of CNT Growth: How Transport Phenomena Shape Deep-Inje
 date: 2025-08-25
 image: "assets/Schematic_showing_DIFCCVD.png"
 image_alt: "Conventional FCCVD vs deep injection schematic"
-summary: "Transport, not just chemistry: the jet–recirculation story behind CNT yield in DI-FCCVD."
+summary: "Transport, not just chemistry: the jet - recirculation story behind CNT yield in DI-FCCVD."
 ---
 
 When I started working on carbon nanotube (CNT) synthesis, one question kept coming up:  
@@ -122,7 +122,7 @@ These numbers are among the **highest reported FCCVD yields**.
 
 ## CFD: Seeing Inside the Reactor
 
-CFD simulations (OpenFOAM) revealed how gas properties reshape jet–recirculation patterns.
+CFD simulations (OpenFOAM) revealed how gas properties reshape jet - recirculation patterns.
 
 - With Ar: jet extends ~0.5 m, overlapping strongly with recirculation.  
 - With He/H₂: jet collapses early, recirculation shrinks, growth zone disappears.
