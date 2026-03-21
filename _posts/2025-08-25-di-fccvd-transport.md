@@ -87,7 +87,7 @@ $$
 X_{CH_4} = \frac{F_{CH_4,in} - F_{CH_4,out}}{F_{CH_4,in}}
 $$
 
-💡 Below critical \(Re\), the jet cannot sustain overlap with hot recirculation : CNT growth collapses.
+💡 Below critical Re, the jet cannot sustain overlap with hot recirculation : CNT growth collapses.
 
 ### The Hydrogen Chemistry
 Hydrogen behaves like helium in transport, but chemically it quenches the carbon precursors.  

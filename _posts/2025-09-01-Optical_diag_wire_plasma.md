@@ -71,7 +71,7 @@ Fe nanoparticles exiting the plasma were sized in real time:
 
 - **Stable size range:** Most conditions produced 3 - 7 nm particles, though a few runs showed slightly broader tails.  
 - **Monodisperse distributions:** log-normal PSDs at low power (80 W).  
-- **Concentration trend:** NP counts dropped from ~\(10^8\) cm⁻³ at 1.5 lpm to ~\(10^7\) cm⁻³ at 2.0 lpm, due to shorter residence time.
+- **Concentration trend:** NP counts dropped from ~10⁸ cm⁻³ at 1.5 lpm to ~10⁷ cm⁻³ at 2.0 lpm, due to shorter residence time.
 
 ![PSD]({{'assets/Optical_diag/80W1.png' | relative_url }})  
 *Figure 4. Iron nanoparticle PSDs. Narrow, monodisperse distributions appear, but concentrations fall with higher flow.*
