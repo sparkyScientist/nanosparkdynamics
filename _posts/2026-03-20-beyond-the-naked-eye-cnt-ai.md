@@ -1,14 +1,14 @@
-# ---
+---
+layout: post
 title: "Beyond the Naked Eye: Building a Custom AI Pipeline for Carbon Nanotube Characterization"
 date: 2026-03-20
-layout: post
+image: "assets/CNT_AI_Project/fig3_ai_detection.png"
+image_alt: "Detectron2 instance segmentation detecting individual carbon nanotubes in TEM images"
+summary: "How I built a Mask R-CNN pipeline using Detectron2 to automatically measure CNT outer diameters from TEM images — from annotation parsing to skeletonization to per-instance nm measurements."
 tags: [CNT, TEM, Detectron2, Machine Learning, image-analysis]
 categories: research
-# draft: true
 draft: false
-# ---
-
-# Beyond the Naked Eye: Building a Custom AI Pipeline for Carbon Nanotube Characterization
+---
 
 *A deep dive into using Mask R-CNN, skeletonization, and perpendicular ray-casting to automatically measure nanotube diameters from TEM images — and why that matters for materials research.*
 
@@ -52,7 +52,7 @@ What I needed was **instance segmentation**: a separate binary mask for every in
 
 This is exactly what **Mask R-CNN** provides.
 
-The architecture ([He et al., 2017](https://arxiv.org/abs/1703.06870)) is a two-stage detector built on a Feature Pyramid Network (FPN) backbone. Stage one generates region proposals (candidate bounding boxes) via a Region Proposal Network (RPN). Stage two classifies each proposal and simultaneously predicts a binary segmentation mask at 28×28 pixel resolution, which is upsampled to the proposal size. The FPN backbone (here, a ResNet-50) extracts features at multiple scales simultaneously — critical when objects vary enormously in apparent size depending on magnification.
+The architecture ([He et al., 2017](https://arxiv.org/abs/1703.06870)) is a two-stage detector built on a Feature Pyramid Network (FPN) backbone. Stage one generates region proposals (candidate bounding boxes) via a Region Proposal Network (RPN). Stage two classifies each proposal and simultaneously predicts a binary segmentation mask at 28x28 pixel resolution, which is upsampled to the proposal size. The FPN backbone (here, a ResNet-50) extracts features at multiple scales simultaneously — critical when objects vary enormously in apparent size depending on magnification.
 
 I implemented this using **Detectron2** (Facebook AI Research), initialized with weights pretrained on the COCO dataset and fine-tuned on my CNT annotations. The framework handles the RPN, RoIAlign, and mask head architecture internally, which let me focus engineering effort on the parts that are genuinely domain-specific: anchor design, training resolution, and the diameter measurement algorithm.
 
@@ -119,9 +119,9 @@ The nm/pixel values are embedded in each COCO image record, derived from the mag
 
 ### Training: Memory Engineering as Much as Deep Learning
 
-Training Mask R-CNN on a Colab T4 (15 GB VRAM) required memory engineering. The native images are 2048×2048, so I trained at **512×512** with batch size 1 and **FP16** to fit the model. This stabilized memory use and enabled training, but requires a scale correction at inference (see Methods).
+Training Mask R-CNN on a Colab T4 (15 GB VRAM) required memory engineering. The native images are 2048x2048, so I trained at **512x512** with batch size 1 and **FP16** to fit the model. This stabilized memory use and enabled training, but requires a scale correction at inference (see Methods).
 
-Training ran for 3,000 iterations with a base learning rate of 0.00025, warm-up over 200 iterations, and learning rate decay steps at iterations 2,010 and 2,670 (the standard 3× schedule for COCO-pretrained models).
+Training ran for 3,000 iterations with a base learning rate of 0.00025, warm-up over 200 iterations, and learning rate decay steps at iterations 2,010 and 2,670 (the standard 3x schedule for COCO-pretrained models).
 
 **Final training metrics at iteration 3,000:**
 - Total loss: ~0.70
@@ -145,7 +145,7 @@ The approach I implemented is geometrically rigorous and robust to all these cas
 
 ### Step 1: Medial Axis Skeletonization
 
-Given the binary mask $M$ for a detected nanotube instance (shape: H × W, True where the tube is), I compute the **morphological skeleton** using the Zhang-Suen thinning algorithm (implemented in `skimage.morphology.skeletonize`). The skeleton $S$ is a one-pixel-wide representation of $M$ that traces the centerline — the medial axis — of the tube.
+Given the binary mask $M$ for a detected nanotube instance (shape: H x W, True where the tube is), I compute the **morphological skeleton** using the Zhang-Suen thinning algorithm (implemented in `skimage.morphology.skeletonize`). The skeleton $S$ is a one-pixel-wide representation of $M$ that traces the centerline — the medial axis — of the tube.
 
 Formally, the skeleton is the set of all points that are equidistant from at least two boundary points of $M$. For a straight tube of uniform width $d$, the skeleton is a single line segment running along the tube axis, and every skeleton point is at distance $d/2$ from the nearest boundary.
 
@@ -184,7 +184,7 @@ $$D_{\text{nm}} = \bar{d}_{\text{px}} \times \frac{\text{nm}}{\text{pixel}}$$
 
 ### The Scale Factor: An Important Implementation Detail
 
-Because training was performed at 512px resolution on 2048×2048 pixel images, the predicted masks are returned at the inference resolution (512px), not the original image resolution. All pixel-space diameter measurements must therefore be multiplied by:
+Because training was performed at 512px resolution on 2048x2048 pixel images, the predicted masks are returned at the inference resolution (512px), not the original image resolution. All pixel-space diameter measurements must therefore be multiplied by:
 
 $$\text{SCALE} = \frac{2048}{512} = 4.0$$
 
@@ -194,19 +194,19 @@ before converting to nm. The raw pixel measurements are stored in the output CSV
 
 ## Visual Results
 
-![Raw TEM micrograph showing CNT bundles and wall contrast](/assets/CNT_AI_Project/fig1_raw_tem.png)
+![Raw TEM micrograph showing CNT bundles and wall contrast]({{ 'assets/CNT_AI_Project/fig1_raw_tem.png' | relative_url }})
 
-*Figure 1 — Raw 2048×2048 TEM micrograph (example). Overlapping bundles and wall contrast vary across the frame.*
+*Figure 1 — Raw 2048x2048 TEM micrograph (example). Overlapping bundles and wall contrast vary across the frame.*
 
-![Fiji annotations burned into TIFF image](/assets/CNT_AI_Project/fig2_annotated.png)
+![Fiji annotations burned into TIFF image]({{ 'assets/CNT_AI_Project/fig2_annotated.png' | relative_url }})
 
 *Figure 2 — Ground-truth annotations (Fiji) extracted from the annotated TIFF overlays used for training.*
 
-![Detectron2 Mask R-CNN predictions overlay](/assets/CNT_AI_Project/fig3_ai_detection.png)
+![Detectron2 Mask R-CNN predictions overlay]({{ 'assets/CNT_AI_Project/fig3_ai_detection.png' | relative_url }})
 
-*Figure 3 — Model predictions with instance masks and diameter labels (mean ± std in nm).* 
+*Figure 3 — Model predictions with instance masks and diameter labels (mean ± std in nm).*
 
-![Diameter distribution histogram for a sample batch](/assets/CNT_AI_Project/fig4_distribution.png)
+![Diameter distribution histogram for a sample batch]({{ 'assets/CNT_AI_Project/fig4_distribution.png' | relative_url }})
 
 *Figure 4 — Final per-batch diameter distribution (example). The pipeline outputs CSVs used to build these plots.*
 
@@ -216,11 +216,11 @@ before converting to nm. The raw pixel measurements are stored in the output CSV
 
 ### What the Model Gets Wrong — and Why
 
-**Dense bundle interiors.** When five or more tubes are tightly packed and their walls are within 0.5 nm of each other, the inter-tube spacing approaches the pixel resolution at 295kx (0.0105 nm/pixel = ~1 Å/pixel). The model tends to merge adjacent tubes in the bundle interior into a single instance, or miss them entirely. The perpendicular ray-casting algorithm can measure the merged region, but that measurement reflects the bundle diameter, not a single tube. These instances are filtered post-hoc by the diameter bounds (0.5–8.0 nm), but some remain.
+**Dense bundle interiors.** When five or more tubes are tightly packed and their walls are within 0.5 nm of each other, the inter-tube spacing approaches the pixel resolution at 295kx (0.0105 nm/pixel = ~1 Angstrom/pixel). The model tends to merge adjacent tubes in the bundle interior into a single instance, or miss them entirely. The perpendicular ray-casting algorithm can measure the merged region, but that measurement reflects the bundle diameter, not a single tube. These instances are filtered post-hoc by the diameter bounds (0.5–8.0 nm), but some remain.
 
 **Low-contrast images.** At 80 kV accelerating voltage, the electron-matter interaction cross-section is higher, which actually improves contrast — but some samples show poor contrast due to thick or non-uniform support films. In these images, detection recall drops (fewer true positives at a given confidence threshold). Lowering the score threshold from 0.3 to 0.2 recovers detections but increases false positives.
 
-**Scale bar calibration.** The nm/pixel values in the current pipeline are estimated from magnification strings in filenames. They are nominal factory-calibrated values. For the 300 kV images (TL-104 and TL-110 300kV batches), the actual pixel scale depends on the exact objective lens excitation used, which varies slightly between sessions. For these batches, the diameters in the CSV are flagged with a warning — the pixel measurements ($\texttt{mean\_diam\_px}$) are correct, but the nm conversion requires verification against the physical scale bar embedded in the TEM image.
+**Scale bar calibration.** The nm/pixel values in the current pipeline are estimated from magnification strings in filenames. They are nominal factory-calibrated values. For the 300 kV images (TL-104 and TL-110 300kV batches), the actual pixel scale depends on the exact objective lens excitation used, which varies slightly between sessions. For these batches, the diameters in the CSV are flagged with a warning — the pixel measurements (`mean_diam_px`) are correct, but the nm conversion requires verification against the physical scale bar embedded in the TEM image.
 
 **Training data volume.** With 493 annotated instances across 43 images, the model is operating near the data-limited regime for a deep learning approach. The `loss_mask` plateauing at ~0.48 reflects this. More annotations — particularly of dense bundles and low-contrast images — would improve both recall and mask quality.
 
@@ -253,16 +253,15 @@ That is what computational tools should do for experimental science: not replace
 
 ---
 
+## Reproducibility
 
-## Reproducibility — quick start
-
-Install dependencies (example):
+Install dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-Run the main pipeline (example commands):
+Run the main pipeline:
 
 ```bash
 # 1) Parse annotated TIFFs into intermediate annotations
@@ -278,7 +277,7 @@ python train.py --config configs/mask_rcnn_cnt.yaml --output outputs/model_final
 python infer.py --weights outputs/model_final.pth --input data/tifs/image.tif --output results.csv
 ```
 
-Example CSV row format (header):
+Example CSV row format:
 
 ```csv
 image,instance_id,mean_diam_px,mean_diam_nm,nm_per_px,confidence
@@ -286,7 +285,7 @@ SP110_img01.tif,23,96.4,1.62,0.0168,0.87
 ```
 
 Notes:
-- `mean_diam_px` is measured at the inference resolution and may need scaling if using a different input size (see SCALE in Methods).  
+- `mean_diam_px` is measured at the inference resolution and may need scaling if using a different input size (see SCALE in Methods).
 - Verify `nm_per_px` from the image scale bar for highest-accuracy nm conversion when possible.
 
 *This project was built in March 2026 using Detectron2, PyTorch, scikit-image, and a lot of annotated TEM images. The full pipeline — from raw TIF to statistical plots — is documented and version-controlled. Code available on request.*
@@ -296,6 +295,3 @@ Notes:
 ## Acknowledgements
 
 TEM micrographs and the initial manual annotations were produced by Mingrui (Lily) Gong. Thank you for the careful imaging and annotation work that made this pipeline possible.
-
-
-**Keywords:** carbon nanotubes, TEM image analysis, instance segmentation, Mask R-CNN, Detectron2, diameter measurement, skeletonization, materials characterization, deep learning, nanomaterials
