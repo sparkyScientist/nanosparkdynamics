@@ -86,7 +86,7 @@ $$\text{colorfulness} = |R - G| + |R - B| + |G - B|$$
 
 Pixels with colorfulness above a threshold of 40 are flagged as annotation pixels. Grayscale TEM pixels - even those with texture, noise, or varying brightness - will always have $|R-G| + |R-B| + |G-B| \approx 0$, so they are naturally excluded.
 
-Once the annotation mask is extracted, I use connected component labeling to isolate each individual drawn line. For each component, I fit a line through its pixel coordinates using **Principal Component Analysis (PCA)**: the principal eigenvector gives the orientation of the line, and the projection range onto that eigenvector gives its length. This yields a centroid $(c_x, c_y)$, an angle in degrees, and a length in pixels.
+Once the annotation mask is extracted, I use connected component labeling to isolate each individual drawn line. For each component, I fit a line through its pixel coordinates using **Principal Component Analysis (PCA)**: the principal eigenvector gives the orientation of the line, and the projection range onto that eigenvector gives its length. This yields a centroid $(c\_x, c\_y)$, an angle in degrees, and a length in pixels.
 
 These image-derived measurements are then matched to the corresponding Fiji CSV file, which records the angle and length (in nanometers) for each drawn measurement. Matching is done greedily by angle similarity - angle is the most reliable signal because the pixel length estimate is sensitive to nm/pixel calibration uncertainty. The matched angle tolerance is ±45°, with length proximity used only as a tiebreaker with a weight of 0.2 relative to angle deviation.
 
@@ -158,11 +158,11 @@ Ordering is done in two stages:
 1. **PCA initialization**: Project all skeleton points onto their first principal component. The point with the minimum projection value is selected as the traversal start.
 2. **Nearest-neighbor traversal**: From the start point, greedily visit the nearest unvisited skeleton point. If the nearest neighbor is more than 5 pixels away, traversal stops (indicating a fragmented or branched skeleton from bundle occlusion).
 
-This produces an ordered sequence $\{p_0, p_1, \ldots, p_L\}$ of skeleton pixels along the tube centerline.
+This produces an ordered sequence $\{p\_0, p\_1, \ldots, p\_L\}$ of skeleton pixels along the tube centerline.
 
 ### Step 3: Perpendicular Ray-Casting
 
-I sample $N$ evenly-spaced points along the ordered skeleton (excluding the first and last points, where boundary effects distort the tangent estimate). At each sample point $p_i = (c_y, c_x)$, I compute the local tangent:
+I sample $N$ evenly-spaced points along the ordered skeleton (excluding the first and last points, where boundary effects distort the tangent estimate). At each sample point $p\_i = (c\_y, c\_x)$, I compute the local tangent:
 
 $$\hat{t}_i = \frac{p_{i+1} - p_{i-1}}{|p_{i+1} - p_{i-1}|}$$
 
@@ -170,7 +170,7 @@ The perpendicular (normal) direction is obtained by rotating the tangent 90°:
 
 $$\hat{n}_i = (-t_{i,y},\ t_{i,x}) \quad \text{(in image coordinates, where y is downward)}$$
 
-I then cast two rays from $p_i$ along $+\hat{n}_i$ and $-\hat{n}_i$, stepping one pixel at a time, until the ray exits the mask $M$ (i.e., the mask value becomes False). The exit distances are $d_+$ and $d_-$.
+I then cast two rays from $p\_i$ along $+\hat{n}\_i$ and $-\hat{n}\_i$, stepping one pixel at a time, until the ray exits the mask $M$ (i.e., the mask value becomes False). The exit distances are $d\_+$ and $d\_-$.
 
 The **diameter at that sample point** is:
 
@@ -178,7 +178,7 @@ $$d_i = d_+ + d_-$$
 
 This is the wall-to-wall distance measured perpendicular to the local tube axis - which is exactly what the researcher measured manually in Fiji, and exactly what the ground truth CSV records.
 
-The reported diameter for a tube is the **mean across all sample points** $\bar{d} = \frac{1}{N}\sum_i d_i$, converted to nanometers using the magnification-derived nm/pixel calibration:
+The reported diameter for a tube is the **mean across all sample points** $\bar{d} = \frac{1}{N}\sum\_i d\_i$, converted to nanometers using the magnification-derived nm/pixel calibration:
 
 $$D_{\text{nm}} = \bar{d}_{\text{px}} \times \frac{\text{nm}}{\text{pixel}}$$
 

@@ -59,6 +59,9 @@ html.is-ready body { opacity: 1; transform: translateY(0); transition: opacity .
   .post-typography h2{ font-size:1.875rem; font-weight:800; margin:2.25rem 0 1rem }
   .post-typography h3{ font-size:1.375rem; font-weight:700; margin:1.75rem 0 .75rem }
   .post-typography img{ margin:1.25rem auto; }
+  /* Keep inline MathJax SVG elements truly inline */
+  mjx-container[jax="SVG"]:not([display="true"]) { display: inline !important; vertical-align: middle; }
+  mjx-container[jax="SVG"][display="true"] { display: block; margin: 1rem auto; overflow-x: auto; }
 
   /* Card list spacing like your original */
   .card-grid{ display:grid; gap:3rem }
