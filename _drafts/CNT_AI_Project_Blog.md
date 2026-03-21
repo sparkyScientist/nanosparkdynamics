@@ -293,4 +293,9 @@ Notes:
 
 ---
 
+## Acknowledgements
+
+TEM micrographs and the initial manual annotations were produced by Mingrui (Lily) Gong. Thank you for the careful imaging and annotation work that made this pipeline possible.
+
+
 **Keywords:** carbon nanotubes, TEM image analysis, instance segmentation, Mask R-CNN, Detectron2, diameter measurement, skeletonization, materials characterization, deep learning, nanomaterials
