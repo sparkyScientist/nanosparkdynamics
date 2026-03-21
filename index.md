@@ -19,7 +19,7 @@ description: The personal research portfolio of Jui Junnarkar.
     {% for post in site.posts limit:2 %}
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 flex flex-col">
       {% if post.image %}
-  <img src="{{ post.image }}" alt="{{ post.image_alt | default: post.title }}" class="w-full h-48 object-cover">
+  <img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title }}" class="w-full h-48 object-cover">
 {% endif %}
 
       <div class="p-6 flex flex-col flex-grow">
