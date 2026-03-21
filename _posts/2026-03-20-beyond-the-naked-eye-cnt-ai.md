@@ -80,13 +80,13 @@ Before training a model, I needed to convert the existing manual annotations int
 
 When a researcher uses Fiji to draw a measurement line and then flattens the image overlay, the colored line pixels are **burned directly into the TIF file**. The underlying TEM image is grayscale (R = G = B at every pixel), so any pixel with significantly unequal RGB channels is, by definition, part of an annotation rather than the TEM signal.
 
-This is the core insight behind `01_parse_annotations.py`. For each pixel $(r, g, b)$, I compute a colorfulness score:
+This is the core insight behind `01_parse_annotations.py`. For each pixel (r, g, b), I compute a colorfulness score:
 
 $$\text{colorfulness} = |R - G| + |R - B| + |G - B|$$
 
-Pixels with colorfulness above a threshold of 40 are flagged as annotation pixels. Grayscale TEM pixels - even those with texture, noise, or varying brightness - will always have $|R-G| + |R-B| + |G-B| \approx 0$, so they are naturally excluded.
+Pixels with colorfulness above a threshold of 40 are flagged as annotation pixels. Grayscale TEM pixels - even those with texture, noise, or varying brightness - will always score near zero, so they are naturally excluded.
 
-Once the annotation mask is extracted, I use connected component labeling to isolate each individual drawn line. For each component, I fit a line through its pixel coordinates using **Principal Component Analysis (PCA)**: the principal eigenvector gives the orientation of the line, and the projection range onto that eigenvector gives its length. This yields a centroid $(c\_x, c\_y)$, an angle in degrees, and a length in pixels.
+Once the annotation mask is extracted, I use connected component labeling to isolate each individual drawn line. For each component, I fit a line through its pixel coordinates using **Principal Component Analysis (PCA)**: the principal eigenvector gives the orientation of the line, and the projection range onto that eigenvector gives its length. This yields a centroid, an angle in degrees, and a length in pixels.
 
 These image-derived measurements are then matched to the corresponding Fiji CSV file, which records the angle and length (in nanometers) for each drawn measurement. Matching is done greedily by angle similarity - angle is the most reliable signal because the pixel length estimate is sensitive to nm/pixel calibration uncertainty. The matched angle tolerance is ±45°, with length proximity used only as a tiebreaker with a weight of 0.2 relative to angle deviation.
 
@@ -145,24 +145,24 @@ The approach I implemented is geometrically rigorous and robust to all these cas
 
 ### Step 1: Medial Axis Skeletonization
 
-Given the binary mask $M$ for a detected nanotube instance (shape: H x W, True where the tube is), I compute the **morphological skeleton** using the Zhang-Suen thinning algorithm (implemented in `skimage.morphology.skeletonize`). The skeleton $S$ is a one-pixel-wide representation of $M$ that traces the centerline - the medial axis - of the tube.
+Given the binary mask **M** for a detected nanotube instance (shape: H x W, True where the tube is), I compute the **morphological skeleton** using the Zhang-Suen thinning algorithm (implemented in `skimage.morphology.skeletonize`). The skeleton **S** is a one-pixel-wide representation of **M** that traces the centerline - the medial axis - of the tube.
 
-Formally, the skeleton is the set of all points that are equidistant from at least two boundary points of $M$. For a straight tube of uniform width $d$, the skeleton is a single line segment running along the tube axis, and every skeleton point is at distance $d/2$ from the nearest boundary.
+Formally, the skeleton is the set of all points equidistant from at least two boundary points of **M**. For a straight tube of uniform width *d*, the skeleton is a single line segment running along the tube axis, and every skeleton point is at distance *d*/2 from the nearest boundary.
 
 ### Step 2: Ordering Skeleton Points
 
-The skeletonization outputs an unordered set of $(y, x)$ pixel coordinates. To cast perpendicular rays, I need these ordered along the tube axis so I can estimate a local tangent at each sample point.
+The skeletonization outputs an unordered set of (y, x) pixel coordinates. To cast perpendicular rays, I need these ordered along the tube axis so I can estimate a local tangent at each sample point.
 
 Ordering is done in two stages:
 
 1. **PCA initialization**: Project all skeleton points onto their first principal component. The point with the minimum projection value is selected as the traversal start.
 2. **Nearest-neighbor traversal**: From the start point, greedily visit the nearest unvisited skeleton point. If the nearest neighbor is more than 5 pixels away, traversal stops (indicating a fragmented or branched skeleton from bundle occlusion).
 
-This produces an ordered sequence $\{p\_0, p\_1, \ldots, p\_L\}$ of skeleton pixels along the tube centerline.
+This produces an ordered sequence of skeleton pixels along the tube centerline.
 
 ### Step 3: Perpendicular Ray-Casting
 
-I sample $N$ evenly-spaced points along the ordered skeleton (excluding the first and last points, where boundary effects distort the tangent estimate). At each sample point $p\_i = (c\_y, c\_x)$, I compute the local tangent:
+I sample *N* evenly-spaced points along the ordered skeleton (excluding the first and last, where boundary effects distort the tangent estimate). At each sample point, I compute the local tangent:
 
 $$\hat{t}_i = \frac{p_{i+1} - p_{i-1}}{|p_{i+1} - p_{i-1}|}$$
 
@@ -170,7 +170,7 @@ The perpendicular (normal) direction is obtained by rotating the tangent 90°:
 
 $$\hat{n}_i = (-t_{i,y},\ t_{i,x}) \quad \text{(in image coordinates, where y is downward)}$$
 
-I then cast two rays from $p\_i$ along $+\hat{n}\_i$ and $-\hat{n}\_i$, stepping one pixel at a time, until the ray exits the mask $M$ (i.e., the mask value becomes False). The exit distances are $d\_+$ and $d\_-$.
+From each sample point, I cast two rays in opposite directions along the local normal, stepping one pixel at a time until each ray exits the mask. The exit distances in the two directions are d+ and d-.
 
 The **diameter at that sample point** is:
 
@@ -178,7 +178,7 @@ $$d_i = d_+ + d_-$$
 
 This is the wall-to-wall distance measured perpendicular to the local tube axis - which is exactly what the researcher measured manually in Fiji, and exactly what the ground truth CSV records.
 
-The reported diameter for a tube is the **mean across all sample points** $\bar{d} = \frac{1}{N}\sum\_i d\_i$, converted to nanometers using the magnification-derived nm/pixel calibration:
+The reported diameter for a tube is the **mean across all sample points**, converted to nanometers using the magnification-derived nm/pixel calibration:
 
 $$D_{\text{nm}} = \bar{d}_{\text{px}} \times \frac{\text{nm}}{\text{pixel}}$$
 
