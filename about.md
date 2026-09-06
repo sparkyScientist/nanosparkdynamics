@@ -21,11 +21,6 @@ permalink: /about/
       <p>
         I am a Ph.D. Candidate in Chemical and Biomolecular Engineering at Rice University, driven by a deep interest in leveraging technology to solve real-world scientific problems. My background is in Chemical Engineering, and through my doctoral research, I have developed expertise in computational fluid dynamics, plasma processing, aerosol science, and the synthesis of advanced materials like carbon nanotubes.
       </p>
-      <div class="my-6">
-        <a href="{{ '/assets/Jui_Junnarkar_CV.pdf' | relative_url }}" target="_blank" class="inline-block bg-blue-600 text-white font-bold text-lg px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md">
-          Download My Resume (PDF)
-        </a>
-      </div>
       <p>
         I believe the future of scientific discovery lies in the synergy between domain expertise and computational tools. My goal is to continue building bridges between these two worlds by creating intuitive and powerful applications that empower researchers to ask bigger questions and find answers faster.
       </p>
