@@ -19,13 +19,16 @@ permalink: /about/
   <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 -mt-32 relative z-10">
     <div class="text-lg text-gray-700 leading-relaxed space-y-4">
       <p>
-        I am a Ph.D. Candidate in Chemical and Biomolecular Engineering at Rice University, driven by a deep interest in leveraging technology to solve real-world scientific problems. My background is in Chemical Engineering, and through my doctoral research, I have developed expertise in computational fluid dynamics, plasma processing, aerosol science, and the synthesis of advanced materials like carbon nanotubes.
+        I am a Process Engineer 3 at Applied Materials and a Ph.D. graduate in Chemical and Biomolecular Engineering from Rice University. My work sits where process engineering meets computation: taking a physical understanding of reactors, flows, and materials, and turning it into models and tools that make real processes run better.
       </p>
       <p>
-        I believe the future of scientific discovery lies in the synergy between domain expertise and computational tools. My goal is to continue building bridges between these two worlds by creating intuitive and powerful applications that empower researchers to ask bigger questions and find answers faster.
+        My doctoral research at Rice centered on the synthesis of carbon nanotubes by floating catalyst CVD, and on the plasma and aerosol physics that govern it. Along the way I built deep expertise in computational fluid dynamics, plasma processing, aerosol science, and reaction engineering, plus the instinct to reach for simulation whenever an experiment alone could not answer the question.
       </p>
       <p>
-        When I'm not in the lab, I enjoy dancing, reading fiction, and hiking. I welcome questions, suggestions, or feedback, so feel free to contact me at <a href="mailto:jui.junnarkar@gmail.com" class="text-blue-600 hover:underline hover:text-blue-800 font-medium">jui.junnarkar@gmail.com</a>.
+        I believe the most interesting engineering problems get solved when domain expertise meets good computational tooling. Whether it is a CFD model that explains an unexpected deposition profile or a script that turns a folder of microscope images into a particle size distribution, I enjoy building the thing that lets you ask a bigger question.
+      </p>
+      <p>
+        Outside of work I enjoy dancing, reading fiction, and hiking. I welcome questions, suggestions, or feedback, so feel free to contact me at <a href="mailto:jui.junnarkar@gmail.com" class="text-blue-600 hover:underline hover:text-blue-800 font-medium">jui.junnarkar@gmail.com</a>.
       </p>
     </div>
 
